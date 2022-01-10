@@ -48,9 +48,9 @@ struct M3ULineParser {
     /// Build extended M3U playlist line.
     mutating func buildLine() {
         if let extTag = self.extTag {
-            self.buildLine(extTag)
+            self.buildLine(of: extTag)
         } else if let extTag = M3UExtTag(rawValue: self.collector) {
-            self.buildLine(extTag)
+            self.buildLine(of: extTag)
         } else {
             self.line = M3ULine.resource(self.collector)
         }
@@ -58,7 +58,7 @@ struct M3ULineParser {
     
     /// Build extended M3U playlist line.
     /// - Parameter extTag: Extended M3U tag of current line.
-    private mutating func buildLine(_ extTag: M3UExtTag) {
+    private mutating func buildLine(of extTag: M3UExtTag) {
         switch extTag {
         case .extM3U:
             self.line = M3ULine.extM3U
