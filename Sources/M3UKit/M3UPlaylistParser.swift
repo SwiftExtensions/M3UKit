@@ -11,7 +11,7 @@ public struct M3UPlaylistParser {
     /// Parsed items of M3U playlist track info.
     public private(set) var items = [M3UPlaylistItem]()
     
-    /// Builds lines of M3U playlist.
+    /// Split M3U playlist into lines and convert to items.
     /// - Parameter playlist: String representation of M3U playlist.
     public mutating func parse(playlist: String? = nil) {
         let playlist = playlist ?? self.playlist
@@ -25,35 +25,8 @@ public struct M3UPlaylistParser {
                 lineParser = M3ULineParser()
             }
         }
-        self.buildItems(from: self.lines)
-    }
-    
-    private mutating func buildItems(from lines: [M3ULine]) {
-        var runtime: TimeInterval?
-        var title = ""
-        var group: String?
-        self.items = []
-        lines.forEach { line in
-            switch line {
-            case .extM3U:
-                break
-            case let .extInf(trackRuntime, trackTitle):
-                runtime = trackRuntime
-                title = trackTitle
-            case let .extGrp(groupTitle):
-                group = groupTitle
-            case let .resource(string):
-                let resource = M3UPlaylistItem.Resource(string: string)
-                let item = M3UPlaylistItem(
-                    runtime: runtime,
-                    title: title,
-                    group: group,
-                    resource: resource)
-                self.items.append(item)
-                runtime = nil
-                title = ""
-            }
-        }
+        let linesConverter = M3ULinesConverter(lines: self.lines)
+        self.items = linesConverter.buildItems()
     }
     
     
