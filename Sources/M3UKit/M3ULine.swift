@@ -26,7 +26,7 @@ public enum M3ULine: Equatable {
     /// #EXTGRP:Foreign Channels
     /// ```
     /// More info see [M3U](https://en.wikipedia.org/wiki/M3U).
-    case extGrp(_ groupe: String)
+    case extGrp(_ group: String)
     /// Track resource.
     ///
     /// Example:
@@ -34,7 +34,7 @@ public enum M3ULine: Equatable {
     /// artist - title.mp3
     /// ```
     /// More info see [M3U](https://en.wikipedia.org/wiki/M3U).
-    case resource(_ resource: String)
+    case resource(_ string: String)
     
     
 }

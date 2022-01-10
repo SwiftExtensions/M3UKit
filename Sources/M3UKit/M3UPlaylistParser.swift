@@ -37,19 +37,18 @@ public struct M3UPlaylistParser {
             switch line {
             case .extM3U:
                 break
-            case let .extInf(_runtime, _title):
-                runtime = _runtime
-                title = _title
-            case let .extGrp(_group):
-                group = _group
-            case let .resource(_resource):
-                let resource: M3UPlaylistItem.Resource
-                if let url = URL(string: _resource) {
-                    resource = .url(url)
-                } else {
-                    resource = .path(_resource)
-                }
-                let item = M3UPlaylistItem(runtime: runtime, title: title, group: group, resource: resource)
+            case let .extInf(trackRuntime, trackTitle):
+                runtime = trackRuntime
+                title = trackTitle
+            case let .extGrp(groupTitle):
+                group = groupTitle
+            case let .resource(string):
+                let resource = M3UPlaylistItem.Resource(string: string)
+                let item = M3UPlaylistItem(
+                    runtime: runtime,
+                    title: title,
+                    group: group,
+                    resource: resource)
                 self.items.append(item)
                 runtime = nil
                 title = ""
