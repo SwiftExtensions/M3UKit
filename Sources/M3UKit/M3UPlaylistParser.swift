@@ -1,18 +1,18 @@
 import Foundation
 
-/// M3U playlist parser.
+/// Extended M3U playlist parser.
 ///
 /// More info see [M3U](https://en.wikipedia.org/wiki/M3U).
 public struct M3UPlaylistParser {
-    /// String representation of M3U playlist.
+    /// String representation of extended M3U playlist.
     public private(set) var playlist: String
-    /// Parsed lines of M3U playlist.
+    /// Parsed lines of extended M3U playlist.
     public private(set) var lines = [M3UPlaylistLine]()
-    /// Parsed items of M3U playlist track info.
+    /// Parsed items of extended M3U playlist track info.
     public private(set) var items = [M3UPlaylistItem]()
     
-    /// Split M3U playlist into lines and convert to items.
-    /// - Parameter playlist: String representation of M3U playlist.
+    /// Split extended M3U playlist into lines and convert to items.
+    /// - Parameter playlist: String representation of extended M3U playlist.
     public mutating func parse(playlist: String? = nil) {
         let playlist = playlist ?? self.playlist
         var lineParser = M3UPlaylistLineParser()
@@ -35,6 +35,7 @@ public struct M3UPlaylistParser {
 // MARK: - Init
 
 public extension M3UPlaylistParser {
+    /// Creates extended M3U playlist parser with empty playlist.
     init() {
         self.playlist = ""
     }
