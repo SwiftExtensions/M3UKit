@@ -17,7 +17,7 @@ struct M3ULineParser {
     /// More info see [M3U](https://en.wikipedia.org/wiki/M3U).
     private var runtime: TimeInterval?
     /// Extended M3U playlist line.
-    private(set) var line: M3ULine? = nil
+    private(set) var line: M3UPlaylistLine? = nil
     
     /// Analyze the playlist character.
     /// - Parameter char: The character to analyze.
@@ -52,7 +52,7 @@ struct M3ULineParser {
         } else if let extTag = M3UExtTag(rawValue: self.collector) {
             self.buildLine(of: extTag)
         } else {
-            self.line = M3ULine.resource(self.collector)
+            self.line = M3UPlaylistLine.resource(self.collector)
         }
     }
     
@@ -61,11 +61,11 @@ struct M3ULineParser {
     private mutating func buildLine(of extTag: M3UExtTag) {
         switch extTag {
         case .extM3U:
-            self.line = M3ULine.extM3U
+            self.line = M3UPlaylistLine.extM3U
         case .extInf:
-            self.line = M3ULine.extInf(self.runtime, self.collector)
+            self.line = M3UPlaylistLine.extInf(self.runtime, self.collector)
         case .extGrp:
-            self.line = M3ULine.extGrp(self.collector)
+            self.line = M3UPlaylistLine.extGrp(self.collector)
         }
     }
     

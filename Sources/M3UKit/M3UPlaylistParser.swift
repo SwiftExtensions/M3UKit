@@ -7,7 +7,7 @@ public struct M3UPlaylistParser {
     /// String representation of M3U playlist.
     public private(set) var playlist: String
     /// Parsed lines of M3U playlist.
-    public private(set) var lines = [M3ULine]()
+    public private(set) var lines = [M3UPlaylistLine]()
     /// Parsed items of M3U playlist track info.
     public private(set) var items = [M3UPlaylistItem]()
     

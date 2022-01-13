@@ -3,7 +3,7 @@ import Foundation
 /// M3U playlist lines converter to playlist items.
 struct M3ULinesConverter {
     // Parsed lines of M3U playlist.
-    let lines: [M3ULine]
+    let lines: [M3UPlaylistLine]
     
     /// Builds M3U playlist items from playlist lines.
     /// - Returns: M3U playlist items from playlist lines.

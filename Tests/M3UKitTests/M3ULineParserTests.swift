@@ -26,12 +26,12 @@ class M3ULineParserTests: XCTestCase {
         }
         self.sut.buildLine()
         
-        XCTAssertEqual(self.sut.line, M3ULine.extM3U)
+        XCTAssertEqual(self.sut.line, M3UPlaylistLine.extM3U)
     }
     
     func test_parseEXTINF_correctParsing() throws {
         let extInf = "#EXTINF:-1,Ultra HD Cinema 4K UHD"
-        let expectedLine = M3ULine.extInf(-1, "Ultra HD Cinema 4K UHD")
+        let expectedLine = M3UPlaylistLine.extInf(-1, "Ultra HD Cinema 4K UHD")
         extInf.forEach {
             _ = self.sut.feed($0)
         }
@@ -42,7 +42,7 @@ class M3ULineParserTests: XCTestCase {
     
     func test_parseEXTGRP_correctParsing() throws {
         let extGrp = "#EXTGRP:Кино"
-        let expectedLine = M3ULine.extGrp("Кино")
+        let expectedLine = M3UPlaylistLine.extGrp("Кино")
         extGrp.forEach {
             _ = self.sut.feed($0)
         }
@@ -53,7 +53,7 @@ class M3ULineParserTests: XCTestCase {
     
     func test_parseResource_correctParsing() throws {
         let resource = "http://zabava-htlive.cdn.ngenix.net/hls/CH_ULTRAHDCINEMA_HLS/bw20000000/variant.m3u8?version=2"
-        let expectedLine = M3ULine.resource(resource)
+        let expectedLine = M3UPlaylistLine.resource(resource)
         resource.forEach {
             _ = self.sut.feed($0)
         }
@@ -63,7 +63,7 @@ class M3ULineParserTests: XCTestCase {
     }
     
     func test_parsePlaylist_correctParsing() throws {
-        var lines = [M3ULine]()
+        var lines = [M3UPlaylistLine]()
         M3UDemoPlaylist.example.appending("\n").forEach {
             if self.sut.feed($0) {
                 return

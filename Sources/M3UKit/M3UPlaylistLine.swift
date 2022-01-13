@@ -2,7 +2,7 @@ import Foundation
 
 /// Extended M3U playlist line.
 /// More info see [M3U](https://en.wikipedia.org/wiki/M3U).
-public enum M3ULine: Equatable {
+public enum M3UPlaylistLine: Equatable {
     /// File header, must be the first line of the file.
     ///
     /// Example:
