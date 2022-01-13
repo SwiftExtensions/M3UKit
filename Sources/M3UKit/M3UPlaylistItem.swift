@@ -1,7 +1,7 @@
 import Foundation
 
 /// M3U playlist track info.
-public struct M3UPlaylistItem {
+public struct M3UPlaylistItem: Equatable {
     /// Track runtime in seconds.
     ///
     /// Example:
