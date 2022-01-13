@@ -25,7 +25,7 @@ public struct M3UPlaylistParser {
                 lineParser = M3UPlaylistLineParser()
             }
         }
-        let linesConverter = M3ULinesConverter(lines: self.lines)
+        let linesConverter = M3UPlaylistLinesConverter(lines: self.lines)
         self.items = linesConverter.buildItems()
     }
     
