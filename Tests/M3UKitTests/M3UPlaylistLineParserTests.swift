@@ -1,5 +1,5 @@
 //
-//  M3ULineParserTests.swift
+//  M3UPlaylistLineParserTests.swift
 //  
 //
 //  Created by Александр Алгашев on 09.01.2022.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import M3UKit
 
-class M3ULineParserTests: XCTestCase {
+class M3UPlaylistLineParserTests: XCTestCase {
     var sut: M3UPlaylistLineParser!
 
     override func setUpWithError() throws {
