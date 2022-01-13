@@ -12,11 +12,11 @@ class M3UPlaylistParserTests: XCTestCase {
         self.sut = nil
     }
 
-    func test_parse_createsCorrectLines() throws {
+    func test_parse_createsCorrectValues() throws {
         self.sut.parse(playlist: M3UDemoPlaylist.example)
-        print(self.sut.items)
         
         XCTAssertEqual(self.sut.lines, M3UDemoPlaylist.linesExample)
+        XCTAssertEqual(self.sut.items, M3UDemoPlaylist.itemsExample)
     }
 
 //    func test_performance_parseChars() throws {
