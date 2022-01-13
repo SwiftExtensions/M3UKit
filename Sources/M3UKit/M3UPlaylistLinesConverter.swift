@@ -1,12 +1,12 @@
 import Foundation
 
-/// M3U playlist lines converter to playlist items.
+/// Extended M3U playlist lines converter to playlist items.
 struct M3UPlaylistLinesConverter {
-    // Parsed lines of M3U playlist.
+    /// Parsed lines of extended M3U playlist.
     let lines: [M3UPlaylistLine]
     
-    /// Builds M3U playlist items from playlist lines.
-    /// - Returns: M3U playlist items from playlist lines.
+    /// Builds extended M3U playlist items from playlist lines.
+    /// - Returns: Extended M3U playlist items from playlist lines.
     func buildItems() -> [M3UPlaylistItem] {
         var runtime: TimeInterval?
         var title = ""

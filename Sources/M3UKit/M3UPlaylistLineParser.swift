@@ -1,12 +1,12 @@
 import Foundation
 
-/// M3U playlist line parser.
+/// Extended M3U playlist line parser.
 ///
 /// More info see [M3U](https://en.wikipedia.org/wiki/M3U).
 struct M3UPlaylistLineParser {
     /// Collected string of valid characters.
     private var collector = ""
-    /// M3U playlist line parser current state.
+    /// Extended M3U playlist line parser current state.
     private var state: M3UPlaylistLineParserState = StartSeeker()
     /// Extended M3U playlist tag of current line (_if available_).
     /// 
