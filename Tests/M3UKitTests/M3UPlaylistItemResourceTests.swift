@@ -10,6 +10,10 @@ import XCTest
 
 class M3UPlaylistItemResourceTests: XCTestCase {
     var sut: M3UPlaylistItem.Resource!
+    
+    override func tearDownWithError() throws {
+        self.sut = nil
+    }
 
     func test_initValidURLPath_createsCorrectResource() throws {
         let path = "http://example.com"
@@ -19,6 +23,8 @@ class M3UPlaylistItemResourceTests: XCTestCase {
         
         XCTAssertNotNil(url)
         XCTAssertEqual(self.sut, expectedResource)
+        XCTAssertEqual(self.sut.url, url)
+        XCTAssertNil(self.sut.path)
     }
     
     func test_initInvalidURLPath_createsCorrectResource() throws {
@@ -27,6 +33,8 @@ class M3UPlaylistItemResourceTests: XCTestCase {
         self.sut = M3UPlaylistItem.Resource(string: path)
         
         XCTAssertEqual(self.sut, expectedResource)
+        XCTAssertEqual(self.sut.path, path)
+        XCTAssertNil(self.sut.url)
     }
 
 

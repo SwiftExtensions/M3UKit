@@ -18,6 +18,11 @@ public extension M3UPlaylistItem {
         /// URL type resource.
         case url(_ url: URL)
         
+        /// Path resource value, if not valid URL.
+        public var path: String? { self.value.path }
+        /// URL resource value.
+        public var url: URL? { self.value.url }
+        
         /// Creates track resource.
         /// - Parameter string: Resource string reprezentation.
         ///
@@ -33,6 +38,23 @@ public extension M3UPlaylistItem {
         }
         
         
+    }
+    
+    
+}
+
+extension M3UPlaylistItem.Resource {
+    /// Track resource raw value.
+    var value: (url: URL?, path: String?) {
+        let value: (url: URL?, path: String?)
+        switch self {
+        case let .path(string):
+            value = (nil, string)
+        case let .url(url):
+            value = (url, nil)
+        }
+        
+        return value
     }
     
     
