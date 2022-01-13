@@ -1,10 +1,10 @@
-extension M3ULineParser {
+extension M3UPlaylistLineParser {
     /// The search for the end of M3U playlist line is underway.
     ///
     /// The search continues until a character equal to the new line is found.
     ///
     /// More info see [M3U](https://en.wikipedia.org/wiki/M3U).
-    struct EndOfLineSeeker: M3ULineParserState {
+    struct EndOfLineSeeker: M3UPlaylistLineParserState {
         let isAppendable: Bool
         let isExtTag: Bool
         let isRuntime: Bool
@@ -39,8 +39,8 @@ extension M3ULineParser {
         /// More info see [M3U](https://en.wikipedia.org/wiki/M3U).
         static let trackInfoWithoutRuntime = EndOfLineSeeker(isAppendable: true, isExtTag: false, isRuntime: false)
         
-        func feed(_ char: Character) -> M3ULineParserState {
-            let state: M3ULineParserState
+        func feed(_ char: Character) -> M3UPlaylistLineParserState {
+            let state: M3UPlaylistLineParserState
             if char.isNewline {
                 state = EndOfLineState(isExtTag: false)
             } else {

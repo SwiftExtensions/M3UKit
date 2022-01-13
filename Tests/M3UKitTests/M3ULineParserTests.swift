@@ -9,10 +9,10 @@ import XCTest
 @testable import M3UKit
 
 class M3ULineParserTests: XCTestCase {
-    var sut: M3ULineParser!
+    var sut: M3UPlaylistLineParser!
 
     override func setUpWithError() throws {
-        self.sut = M3ULineParser()
+        self.sut = M3UPlaylistLineParser()
     }
 
     override func tearDownWithError() throws {
@@ -69,7 +69,7 @@ class M3ULineParserTests: XCTestCase {
                 return
             } else if let line = self.sut.line {
                 lines.append(line)
-                self.sut = M3ULineParser()
+                self.sut = M3UPlaylistLineParser()
             }
         }
         

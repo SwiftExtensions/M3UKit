@@ -1,5 +1,5 @@
 /// A type that can be used to determine ``M3ULineParser`` current state.
-protocol M3ULineParserState {
+protocol M3UPlaylistLineParserState {
     /// Valid character to collect.
     var isAppendable: Bool { get }
     /// Characters for extended M3U playlist tag identification has been collected.
@@ -17,7 +17,7 @@ protocol M3ULineParserState {
     /// - Parameters:
     /// - char: The character to analyze.
     /// - Returns: The current state of the ``M3ULineParser`` parser.
-    func feed(_ char: Character) -> M3ULineParserState
+    func feed(_ char: Character) -> M3UPlaylistLineParserState
 
 
 }

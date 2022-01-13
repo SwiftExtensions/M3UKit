@@ -15,14 +15,14 @@ public struct M3UPlaylistParser {
     /// - Parameter playlist: String representation of M3U playlist.
     public mutating func parse(playlist: String? = nil) {
         let playlist = playlist ?? self.playlist
-        var lineParser = M3ULineParser()
+        var lineParser = M3UPlaylistLineParser()
         self.lines = []
         playlist.appending("\n").forEach {
             if lineParser.feed($0) {
                 return
             } else if let line = lineParser.line {
                 self.lines.append(line)
-                lineParser = M3ULineParser()
+                lineParser = M3UPlaylistLineParser()
             }
         }
         let linesConverter = M3ULinesConverter(lines: self.lines)
