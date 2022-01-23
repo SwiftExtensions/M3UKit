@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Networker",
+        "repositoryURL": "https://github.com/SwiftExtensions/HTTPURLRequest.git",
+        "state": {
+          "branch": null,
+          "revision": "95dda540dc1011688abea115a07084999df2cd9c",
+          "version": "0.0.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
