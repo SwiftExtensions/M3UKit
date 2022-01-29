@@ -18,9 +18,8 @@ extension M3UPlaylistLoader {
             let result: ParserResult
             switch response {
             case let .success(response):
-                let playlist = response.data.utf8String
                 var parser = M3UPlaylistParser()
-                parser.parse(playlist: playlist)
+                parser.parse(data: response.data)
                 result = .success(parser)
             case let .failure(error):
                 result = .failure(error)

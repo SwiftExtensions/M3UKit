@@ -1,4 +1,5 @@
 import Foundation
+import Networker
 
 /// Extended M3U playlist parser.
 ///
@@ -27,6 +28,12 @@ public struct M3UPlaylistParser {
         }
         let linesConverter = M3UPlaylistLinesConverter(lines: self.lines)
         self.items = linesConverter.buildItems()
+    }
+    
+    /// Split extended M3U playlist into lines and convert to items.
+    /// - Parameter playlist: Data representation of extended M3U playlist.
+    public mutating func parse(data: Data) {
+        self.parse(playlist: data.utf8String)
     }
     
     

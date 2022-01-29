@@ -12,8 +12,15 @@ class M3UPlaylistParserTests: XCTestCase {
         self.sut = nil
     }
 
-    func test_parse_createsCorrectValues() throws {
+    func test_parsePlaylist_createsCorrectValues() throws {
         self.sut.parse(playlist: M3UDemoPlaylist.example)
+        
+        XCTAssertEqual(self.sut.lines, M3UDemoPlaylist.linesExample)
+        XCTAssertEqual(self.sut.items, M3UDemoPlaylist.itemsExample)
+    }
+    
+    func test_parseData_createsCorrectValues() throws {
+        self.sut.parse(data: M3UDemoPlaylist.dataExample)
         
         XCTAssertEqual(self.sut.lines, M3UDemoPlaylist.linesExample)
         XCTAssertEqual(self.sut.items, M3UDemoPlaylist.itemsExample)

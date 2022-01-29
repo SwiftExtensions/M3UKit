@@ -43,5 +43,7 @@ https://zabava-htlive.cdn.ngenix.net/hls/CH_RUSSIANEXTREMEULTRA_HLS/bw20000000/v
             resource: .url(URL(string: "https://zabava-htlive.cdn.ngenix.net/hls/CH_RUSSIANEXTREMEULTRA_HLS/bw20000000/variant.m3u8?version=2")!))
     ]
     
+    static let dataExample = Data(example.utf8)
+    
     
 }
