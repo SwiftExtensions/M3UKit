@@ -12,7 +12,7 @@ public struct M3UPlaylistParser {
     /// Parsed items of extended M3U playlist track info.
     public private(set) var items = [M3UPlaylistItem]()
     
-    /// Split extended M3U playlist into lines and convert to items.
+    /// Splits extended M3U playlist into lines and convert to items.
     /// - Parameter playlist: String representation of extended M3U playlist.
     public mutating func parse(playlist: String? = nil) {
         let playlist = playlist ?? self.playlist
@@ -30,8 +30,8 @@ public struct M3UPlaylistParser {
         self.items = linesConverter.buildItems()
     }
     
-    /// Split extended M3U playlist into lines and convert to items.
-    /// - Parameter playlist: Data representation of extended M3U playlist.
+    /// Converts data into string and splits extended M3U playlist into lines and convert to items.
+    /// - Parameter data: Data representation of extended M3U playlist.
     public mutating func parse(data: Data) {
         self.parse(playlist: data.utf8String)
     }
