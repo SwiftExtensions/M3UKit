@@ -53,17 +53,6 @@ class M3UPlaylistLoaderResponseHandlerTests: XCTestCase {
 
 }
 
-private extension NSError {
-    static var urlRequestTimedOut: NSError {
-        NSError(
-            domain: NSURLErrorDomain,
-            code: NSURLErrorTimedOut,
-            userInfo: nil)
-    }
-    
-    
-}
-
 private extension HTTPURLResponse {
     static var ok200: HTTPURLResponse {
         let url = URL(string: "https://example.com/")!
