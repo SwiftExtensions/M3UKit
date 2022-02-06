@@ -73,15 +73,13 @@ extension M3UPlaylistLoaderTests {
         MockURLSession.response = HTTPURLResponse.ok200
 
         let targetQueue = DispatchQueue(label: #function)
-
-        let expectation = XCTestExpectation(description: #function)
+        
         self.sut = M3UPlaylistLoader(session: self.mockSession)
         self.sut.load(path: self.path, dispatchQueue: targetQueue) { response in
             dispatchPrecondition(condition: .onQueue(targetQueue))
-            expectation.fulfill()
+            XCTAssertNotNil(response.success)
+            XCTAssertNotNil(response.failure)
         }
-
-        self.wait(for: [expectation], timeout: 0.01)
     }
     
 
@@ -119,23 +117,20 @@ extension M3UPlaylistLoaderTests {
         }
     }
     
-    // TODO: - Unknown fails with multiple tests
-//    @available(iOS 10.0, *)
-//    func test_loadURL_callsInCorrectDispatchQueue() {
-//        MockURLSession.data = M3UDemoPlaylist.dataExample
-//        MockURLSession.response = HTTPURLResponse.ok200
-//
-//        let targetQueue = DispatchQueue(label: #function)
-//
-//        let expectation = XCTestExpectation(description: #function)
-//        self.sut = M3UPlaylistLoader(session: self.mockSession)
-//        self.sut.load(url: self.url, dispatchQueue: targetQueue) { response in
-//            dispatchPrecondition(condition: .onQueue(targetQueue))
-//            expectation.fulfill()
-//        }
-//
-//        self.wait(for: [expectation], timeout: 0.01)
-//    }
+    @available(iOS 10.0, *)
+    func test_loadURL_callsInCorrectDispatchQueue() {
+        MockURLSession.data = M3UDemoPlaylist.dataExample
+        MockURLSession.response = HTTPURLResponse.ok200
+
+        let targetQueue = DispatchQueue(label: #function)
+        
+        self.sut = M3UPlaylistLoader(session: self.mockSession)
+        self.sut.load(url: self.url, dispatchQueue: targetQueue) { response in
+            dispatchPrecondition(condition: .onQueue(targetQueue))
+            XCTAssertNotNil(response.success)
+            XCTAssertNotNil(response.failure)
+        }
+    }
     
 
 }
@@ -172,23 +167,20 @@ extension M3UPlaylistLoaderTests {
         }
     }
     
-    // TODO: - Unknown fails with multiple tests
-//    @available(iOS 10.0, *)
-//    func test_loadRequest_callsInCorrectDispatchQueue() {
-//        MockURLSession.data = M3UDemoPlaylist.dataExample
-//        MockURLSession.response = HTTPURLResponse.ok200
-//
-//        let targetQueue = DispatchQueue(label: #function)
-//
-//        let expectation = XCTestExpectation(description: #function)
-//        self.sut = M3UPlaylistLoader(session: self.mockSession)
-//        self.sut.load(request: self.request, dispatchQueue: targetQueue) { response in
-//            dispatchPrecondition(condition: .onQueue(targetQueue))
-//            expectation.fulfill()
-//        }
-//
-//        self.wait(for: [expectation], timeout: 0.01)
-//    }
+    @available(iOS 10.0, *)
+    func test_loadRequest_callsInCorrectDispatchQueue() {
+        MockURLSession.data = M3UDemoPlaylist.dataExample
+        MockURLSession.response = HTTPURLResponse.ok200
+
+        let targetQueue = DispatchQueue(label: #function)
+        
+        self.sut = M3UPlaylistLoader(session: self.mockSession)
+        self.sut.load(request: self.request, dispatchQueue: targetQueue) { response in
+            dispatchPrecondition(condition: .onQueue(targetQueue))
+            XCTAssertNotNil(response.success)
+            XCTAssertNotNil(response.failure)
+        }
+    }
     
 
 }

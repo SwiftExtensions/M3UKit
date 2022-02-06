@@ -11,6 +11,7 @@ extension URLSession {
     static func mockSession(protocolClass: AnyClass) -> URLSession {
         let sessionConfiguration = URLSessionConfiguration.ephemeral
         sessionConfiguration.protocolClasses = [protocolClass]
+        URLProtocol.registerClass(protocolClass)
         
         return URLSession(configuration: sessionConfiguration)
     }
