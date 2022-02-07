@@ -8,12 +8,10 @@
 import Foundation
 
 class MockURLSession: URLProtocol {
-    static var data: Data?
-    static var response: URLResponse?
-    static var error: Error?
+    static var results = [String : Result]()
     
     override class func canInit(with request: URLRequest) -> Bool {
-        true
+        MockURLSession.results[request.url?.absoluteString ?? ""] != nil
     }
     
     override class func canonicalRequest(for request: URLRequest) -> URLRequest {
@@ -21,15 +19,16 @@ class MockURLSession: URLProtocol {
     }
     
     override func startLoading() {
-        if let response = MockURLSession.response {
+        let result = MockURLSession.results[request.url?.absoluteString ?? ""]
+        if let response = result?.response {
             self.client?.urlProtocol(self,
                                      didReceive: response,
                                      cacheStoragePolicy: .notAllowed)
         }
-        if let data = MockURLSession.data {
+        if let data = result?.data {
             self.client?.urlProtocol(self, didLoad: data)
         }
-        if let error = MockURLSession.error {
+        if let error = result?.error {
             self.client?.urlProtocol(self, didFailWithError: error)
         }
         self.client?.urlProtocolDidFinishLoading(self)
