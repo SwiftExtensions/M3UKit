@@ -45,6 +45,7 @@ extension M3UPlaylistLoaderTests {
             MockURLSession.results[path] = nil
         }
         XCTAssertNotNil(dataTask)
+        XCTAssertEqual(dataTask?.originalRequest?.url?.absoluteString, path)
     }
     
     func test_loadPath_callsSuccess() throws {
@@ -64,6 +65,7 @@ extension M3UPlaylistLoaderTests {
             MockURLSession.results[path] = nil
         }
         XCTAssertNotNil(dataTask)
+        XCTAssertEqual(dataTask?.originalRequest?.url?.absoluteString, path)
     }
 
     @available(iOS 10.0, *)
@@ -87,6 +89,7 @@ extension M3UPlaylistLoaderTests {
             }
         }
         XCTAssertNotNil(dataTask)
+        XCTAssertEqual(dataTask?.originalRequest?.url?.absoluteString, path)
     }
     
 
@@ -115,6 +118,7 @@ extension M3UPlaylistLoaderTests {
             MockURLSession.results[path] = nil
         }
         XCTAssertNotNil(dataTask)
+        XCTAssertEqual(dataTask.originalRequest?.url, url)
     }
 
     func test_loadURL_callsSuccess() throws {
@@ -135,6 +139,7 @@ extension M3UPlaylistLoaderTests {
             MockURLSession.results[path] = nil
         }
         XCTAssertNotNil(dataTask)
+        XCTAssertEqual(dataTask.originalRequest?.url, url)
     }
 
     @available(iOS 10.0, *)
@@ -159,6 +164,7 @@ extension M3UPlaylistLoaderTests {
             }
         }
         XCTAssertNotNil(dataTask)
+        XCTAssertEqual(dataTask.originalRequest?.url, url)
     }
 
 
@@ -188,6 +194,7 @@ extension M3UPlaylistLoaderTests {
             MockURLSession.results[path] = nil
         }
         XCTAssertNotNil(dataTask)
+        XCTAssertEqual(dataTask.originalRequest, request)
     }
 
     func test_loadRequest_callsSuccess() throws {
@@ -209,6 +216,7 @@ extension M3UPlaylistLoaderTests {
             MockURLSession.results[path] = nil
         }
         XCTAssertNotNil(dataTask)
+        XCTAssertEqual(dataTask.originalRequest, request)
     }
 
     @available(iOS 10.0, *)
@@ -234,6 +242,7 @@ extension M3UPlaylistLoaderTests {
             }
         }
         XCTAssertNotNil(dataTask)
+        XCTAssertEqual(dataTask.originalRequest, request)
     }
 
 
