@@ -1,3 +1,10 @@
+//
+//  M3UExtTag.swift
+//  M3UKit
+//
+//  Created by Александр Алгашев on 23.01.2022.
+//
+
 /// Extended M3U Tag.
 /// More info see [M3U](https://en.wikipedia.org/wiki/M3U).
 public enum M3UExtTag: String {

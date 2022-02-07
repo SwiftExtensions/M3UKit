@@ -1,3 +1,10 @@
+//
+//  M3UPlaylistLineParser.StartSeeker.swift
+//  M3UKit
+//
+//  Created by Александр Алгашев on 23.01.2022.
+//
+
 extension M3UPlaylistLineParser {
     /// The search for the beginning of the line is underway.
     ///

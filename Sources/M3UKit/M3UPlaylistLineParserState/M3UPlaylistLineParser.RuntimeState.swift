@@ -1,3 +1,10 @@
+//
+//  M3UPlaylistLineParser.RuntimeState.swift
+//  M3UKit
+//
+//  Created by Александр Алгашев on 23.01.2022.
+//
+
 extension M3UPlaylistLineParser {
     /// The search for the runtime of `#EXTINF:` tag is underway.
     ///

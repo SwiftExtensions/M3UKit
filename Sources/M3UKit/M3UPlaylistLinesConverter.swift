@@ -1,6 +1,13 @@
 import Foundation
 
 /// Extended M3U playlist lines converter to playlist items.
+//
+//  M3UPlaylistLinesConverter.swift
+//  M3UKit
+//
+//  Created by Александр Алгашев on 23.01.2022.
+//
+
 struct M3UPlaylistLinesConverter {
     /// Parsed lines of extended M3U playlist.
     let lines: [M3UPlaylistLine]

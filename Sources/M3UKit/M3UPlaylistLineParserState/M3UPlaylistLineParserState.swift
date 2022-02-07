@@ -1,3 +1,10 @@
+//
+//  M3UPlaylistLineParserState.swift
+//  M3UKit
+//
+//  Created by Александр Алгашев on 23.01.2022.
+//
+
 /// A type that can be used to determine ``M3ULineParser`` current state.
 protocol M3UPlaylistLineParserState {
     /// Valid character to collect.

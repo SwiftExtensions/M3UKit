@@ -1,3 +1,10 @@
+//
+//  M3UDemoPlaylist.swift
+//
+//
+//  Created by Александр Алгашев on 07.02.2022.
+//
+
 @testable import M3UKit
 import Foundation
 

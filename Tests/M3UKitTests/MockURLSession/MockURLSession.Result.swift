@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  MockURLSession.Result.swift
 //  
 //
 //  Created by Александр Алгашев on 07.02.2022.

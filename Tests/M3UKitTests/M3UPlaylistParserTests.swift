@@ -1,3 +1,10 @@
+//
+//  M3UPlaylistParserTests.swift
+//
+//
+//  Created by Александр Алгашев on 07.02.2022.
+//
+
 import XCTest
 @testable import M3UKit
 

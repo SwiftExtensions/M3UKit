@@ -1,3 +1,10 @@
+//
+//  M3UPlaylistLineParser.swift
+//  M3UKit
+//
+//  Created by Александр Алгашев on 23.01.2022.
+//
+
 import Foundation
 
 /// Extended M3U playlist line parser.

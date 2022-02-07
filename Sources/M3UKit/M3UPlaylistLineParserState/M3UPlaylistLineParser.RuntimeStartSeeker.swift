@@ -1,3 +1,10 @@
+//
+//  M3UPlaylistLineParser.RuntimeStartSeeker.swift
+//  M3UKit
+//
+//  Created by Александр Алгашев on 23.01.2022.
+//
+
 extension M3UPlaylistLineParser {
     /// The search for the runtime begining of `#EXTINF:` tag is underway.
     ///

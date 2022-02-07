@@ -1,3 +1,10 @@
+//
+//  M3UPlaylistLineParser.ExtTagEndSeeker.swift
+//  M3UKit
+//
+//  Created by Александр Алгашев on 23.01.2022.
+//
+
 extension M3UPlaylistLineParser {
     /// The search for the extended M3U tag is underway.
     ///

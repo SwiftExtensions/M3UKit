@@ -1,3 +1,10 @@
+//
+//  M3UPlaylistItem.Resource.swift
+//  M3UKit
+//
+//  Created by Александр Алгашев on 23.01.2022.
+//
+
 import Foundation
 
 public extension M3UPlaylistItem {

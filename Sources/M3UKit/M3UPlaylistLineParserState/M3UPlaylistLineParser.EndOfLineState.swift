@@ -1,3 +1,10 @@
+//
+//  M3UPlaylistLineParser.EndOfLineState.swift
+//  M3UKit
+//
+//  Created by Александр Алгашев on 23.01.2022.
+//
+
 extension M3UPlaylistLineParser {
     /// The end of M3U playlist line.
     ///
