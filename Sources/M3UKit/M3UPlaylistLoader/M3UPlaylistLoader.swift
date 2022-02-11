@@ -160,21 +160,49 @@ public struct M3UPlaylistLoader {
         return self.load(request, dispatchQueue, completionHandler)
     }
     
-    /// Loads extended M3U playlist from network.
-    /// - Parameters:
-    ///   - url: URL of extended M3U playlist.
-    ///   - dispatchQueue: A dispatch queue for completion handler. Method uses a system-provided URLSession delegate if `nil`.
-    ///   - completion: The completion handler to call when the extended M3U playlist load request is complete.
-    ///   This handler is executed on the delegate queue.
-    /// - Returns: A URL session task that returns downloaded extended M3U playlist.
+    /**
+     Loads an extended [M3U](https://en.wikipedia.org/wiki/M3U) playlist from network.
+     - Parameters:
+        - request: [URLRequest](https://developer.apple.com/documentation/foundation/urlrequest)
+     of an extended M3U playlist.
+        - dispatchQueue: A dispatch queue for completion handlers.
+     Method uses a system-provided URLSession delegate if `nil`.
+        - completionHandler: The completion handler to call when the extended M3U playlist load request is complete.
+     This handler is executed on the delegate queue.
+     The method calls your block whether session data task completes successfully or fails.
+     The block has no return value and takes one parameter:
+        - parserResult: The extended M3U playlist request result.
+        - completion: The completion handler to call when the extended M3U playlist load request is complete.
+     This handler is executed on the delegate queue.
+     - Returns: A URL session task that returns downloaded extended M3U playlist.
+     
+     For network requests the `HTTPURLRequest` (`Networker` framework) is used.
+     
+     An example of usage:
+     ```swift
+     import M3UKit
+
+     let playlistLoader = M3UPlaylistLoader()
+     let url = URL(string: PATH_TO_PLAYLIST)!
+     let request = URLRequest(url: url)
+     playlistLoader.load(request: request) { response in
+         switch response {
+         case let .success(parser):
+             print(parser.items)
+         case let .failure(error):
+             print(error)
+         }
+     }
+     ```
+     */
     @discardableResult
     public func load(
         request: URLRequest,
         dispatchQueue: DispatchQueue? = nil,
-        completion: @escaping Completion) -> URLSessionDataTask
+        completionHandler: @escaping Completion) -> URLSessionDataTask
     {
         let request = HTTPURLRequest(request: request, session: self.session)
-        return self.load(request, dispatchQueue, completion)
+        return self.load(request, dispatchQueue, completionHandler)
     }
     
     
