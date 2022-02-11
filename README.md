@@ -1,5 +1,7 @@
 # M3UKit
 
+![action](https://github.com/SwiftExtensions/M3UKit/actions/workflows/swift.yml/badge.svg)
+
 **M3UKit** is an easy way of parsing of extended [M3U](https://en.wikipedia.org/wiki/M3U) playlists.
 
 ## Content
