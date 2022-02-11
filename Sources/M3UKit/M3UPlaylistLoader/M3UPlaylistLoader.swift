@@ -31,25 +31,48 @@ public struct M3UPlaylistLoader {
         self.session = session
     }
     
-    /// Loads extended M3U playlist from network.
-    /// - Parameters:
-    ///   - path: URL path to extended M3U playlist.
-    ///   - dispatchQueue: A dispatch queue for completion handlers. Method uses a system-provided URLSession delegate if `nil`.
-    ///   - completion: The completion handler to call when the extended M3U playlist load request is complete.
-    ///   This handler is executed on the delegate queue.
-    ///   - Returns: A URL session task that returns downloaded extended M3U playlist
-    ///   if success, or `nil` - for invalid path.
+    /**
+     Loads an extended [M3U](https://en.wikipedia.org/wiki/M3U) playlist from network.
+     - Parameters:
+        - path: URL path to extended M3U playlist.
+        - dispatchQueue: A dispatch queue for completion handlers.
+     Method uses a system-provided URLSession delegate if `nil`.
+        - completionHandler: The completion handler to call when the extended M3U playlist load request is complete.
+     This handler is executed on the delegate queue.
+     The method calls your block whether session data task completes successfully or fails.
+     The block has no return value and takes one parameter:
+        - parserResult: The extended M3U playlist request result.
+     - Returns: A URL session task that returns a downloaded extended M3U playlist
+     if success, or `nil` - for invalid path.
+     
+     For network requests the `HTTPURLRequest` (`Networker` framework) is used.
+     
+     An example of usage:
+     ```swift
+     import M3UKit
+
+     let playlistLoader = M3UPlaylistLoader()
+     playlistLoader.load(path: URL_TO_PLAYLIST) { response in
+         switch response {
+         case let .success(parser):
+             print(parser.items)
+         case let .failure(error):
+             print(error)
+         }
+     }
+     ```
+     */
     @discardableResult
     public func load(
         path: String,
         dispatchQueue: DispatchQueue? = nil,
-        completion: @escaping Completion) -> URLSessionDataTask?
+        completionHandler: @escaping Completion) -> URLSessionDataTask?
     {
         let dataTask: URLSessionDataTask?
         do {
-            dataTask = try self.load(path, dispatchQueue, completion)
+            dataTask = try self.load(path, dispatchQueue, completionHandler)
         } catch {
-            completion(.failure(error))
+            completionHandler(.failure(error))
             dataTask = nil
         }
         
