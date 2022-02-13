@@ -37,7 +37,7 @@ class M3UPlaylistLoaderResponseHandlerTests: XCTestCase {
     }
     
     func test_handleData_createsSuccessResult() throws {
-        let data = M3UDemoPlaylist.dataExample
+        let data = String.M3UPlaylist.demo.utf8EncodingData
         let dataResponse = DataResponse(data: data, response: HTTPURLResponse.ok200)
         let response: Result<DataResponse, Error> = Result.success(dataResponse)
         let handleResult = self.sut.handle(response)

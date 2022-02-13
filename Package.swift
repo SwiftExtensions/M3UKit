@@ -31,6 +31,9 @@ let package = Package(
             ]),
         .testTarget(
             name: "M3UKitTests",
-            dependencies: ["M3UKit"]),
+            dependencies: ["M3UKit"],
+            resources: [
+                .copy("Resources/demo.m3u")
+            ]),
     ]
 )

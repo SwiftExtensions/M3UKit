@@ -64,7 +64,7 @@ class M3UPlaylistLineParserTests: XCTestCase {
     
     func test_parsePlaylist_correctParsing() throws {
         var lines = [M3UPlaylistLine]()
-        M3UDemoPlaylist.example.appending("\n").forEach {
+        String.M3UPlaylist.demo.appending("\n").forEach {
             if self.sut.feed($0) {
                 return
             } else if let line = self.sut.line {

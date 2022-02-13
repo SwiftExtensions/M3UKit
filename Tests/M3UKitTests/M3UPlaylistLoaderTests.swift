@@ -49,7 +49,7 @@ extension M3UPlaylistLoaderTests {
     }
     
     func test_loadPath_callsSuccess() throws {
-        let data = M3UDemoPlaylist.dataExample
+        let data = String.M3UPlaylist.demo.utf8EncodingData
         let response = HTTPURLResponse.ok200
         let result = MockURLSession.Result(data: data, response: response, error: nil)
         let path = "https://example.com/" + #function.description
@@ -70,7 +70,7 @@ extension M3UPlaylistLoaderTests {
 
     @available(iOS 10.0, *)
     func test_loadPath_callsInCorrectDispatchQueue() {
-        let data = M3UDemoPlaylist.dataExample
+        let data = String.M3UPlaylist.demo.utf8EncodingData
         let response = HTTPURLResponse.ok200
         let result = MockURLSession.Result(data: data, response: response, error: nil)
         let path = "https://example.com/" + #function.description
@@ -122,7 +122,7 @@ extension M3UPlaylistLoaderTests {
     }
 
     func test_loadURL_callsSuccess() throws {
-        let data = M3UDemoPlaylist.dataExample
+        let data = String.M3UPlaylist.demo.utf8EncodingData
         let response = HTTPURLResponse.ok200
         let result = MockURLSession.Result(data: data, response: response, error: nil)
         let path = "https://example.com/" + #function.description
@@ -144,7 +144,7 @@ extension M3UPlaylistLoaderTests {
 
     @available(iOS 10.0, *)
     func test_loadURL_callsInCorrectDispatchQueue() {
-        let data = M3UDemoPlaylist.dataExample
+        let data = String.M3UPlaylist.demo.utf8EncodingData
         let response = HTTPURLResponse.ok200
         let result = MockURLSession.Result(data: data, response: response, error: nil)
         let path = "https://example.com/" + #function.description
@@ -198,7 +198,7 @@ extension M3UPlaylistLoaderTests {
     }
 
     func test_loadRequest_callsSuccess() throws {
-        let data = M3UDemoPlaylist.dataExample
+        let data = String.M3UPlaylist.demo.utf8EncodingData
         let response = HTTPURLResponse.ok200
         let result = MockURLSession.Result(data: data, response: response, error: nil)
         let path = "https://example.com/" + #function.description
@@ -221,7 +221,7 @@ extension M3UPlaylistLoaderTests {
 
     @available(iOS 10.0, *)
     func test_loadRequest_callsInCorrectDispatchQueue() {
-        let data = M3UDemoPlaylist.dataExample
+        let data = String.M3UPlaylist.demo.utf8EncodingData
         let response = HTTPURLResponse.ok200
         let result = MockURLSession.Result(data: data, response: response, error: nil)
         let path = "https://example.com/" + #function.description

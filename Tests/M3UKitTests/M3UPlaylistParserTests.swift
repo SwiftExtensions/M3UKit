@@ -20,14 +20,14 @@ class M3UPlaylistParserTests: XCTestCase {
     }
 
     func test_parsePlaylist_createsCorrectValues() throws {
-        self.sut.parse(playlist: M3UDemoPlaylist.example)
+        self.sut.parse(playlist: .M3UPlaylist.demo)
         
         XCTAssertEqual(self.sut.lines, M3UDemoPlaylist.linesExample)
         XCTAssertEqual(self.sut.items, M3UDemoPlaylist.itemsExample)
     }
     
     func test_parseData_createsCorrectValues() throws {
-        self.sut.parse(data: M3UDemoPlaylist.dataExample)
+        self.sut.parse(data: String.M3UPlaylist.demo.utf8EncodingData)
         
         XCTAssertEqual(self.sut.lines, M3UDemoPlaylist.linesExample)
         XCTAssertEqual(self.sut.items, M3UDemoPlaylist.itemsExample)
