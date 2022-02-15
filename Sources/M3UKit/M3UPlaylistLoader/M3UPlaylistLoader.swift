@@ -54,8 +54,8 @@ public struct M3UPlaylistLoader {
      let playlistLoader = M3UPlaylistLoader()
      playlistLoader.load(path: URL_TO_PLAYLIST) { response in
          switch response {
-         case let .success(parser):
-             print(parser.items)
+         case let .success(playlist):
+             print(playlist.items)
          case let .failure(error):
              print(error)
          }
@@ -142,8 +142,8 @@ public struct M3UPlaylistLoader {
      let url = URL(string: PATH_TO_PLAYLIST)!
      playlistLoader.load(url: url) { response in
          switch response {
-         case let .success(parser):
-             print(parser.items)
+         case let .success(playlist):
+             print(playlist.items)
          case let .failure(error):
              print(error)
          }
@@ -187,8 +187,8 @@ public struct M3UPlaylistLoader {
      let request = URLRequest(url: url)
      playlistLoader.load(request: request) { response in
          switch response {
-         case let .success(parser):
-             print(parser.items)
+         case let .success(playlist):
+             print(playlist.items)
          case let .failure(error):
              print(error)
          }

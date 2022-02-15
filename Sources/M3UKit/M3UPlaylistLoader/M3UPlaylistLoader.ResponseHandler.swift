@@ -18,7 +18,7 @@ extension M3UPlaylistLoader {
             let result: PlaylistResult
             switch response {
             case let .success(response):
-                let parser = M3UPlaylistParser()
+                let parser = M3UPlaylistDecoder()
                 let playlist = parser.parse(data: response.data)
                 result = .success(playlist)
             case let .failure(error):

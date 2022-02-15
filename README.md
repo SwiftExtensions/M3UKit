@@ -39,8 +39,8 @@ For more information, see [`Adding Package Dependencies to Your App`](https://de
 ```swift
 import M3UKit
 
-let parser = M3UPlaylistParser()
-let playlist = parser.parse(string: PLAYLIST)
+let decoder = M3UPlaylistDecoder()
+let playlist = decoder.parse(string: PLAYLIST)
 ```
 [Go to content](#content)
 
