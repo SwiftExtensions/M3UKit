@@ -36,19 +36,11 @@ For more information, see [`Adding Package Dependencies to Your App`](https://de
 
 ## Parsing
 
-You have two options:
 ```swift
 import M3UKit
 
-var parser = M3UPlaylistParser()
-parser.parse(playlist: PLAYLIST)
-```
-or
-```swift
-import M3UKit
-
-var parser = M3UPlaylistParser(playlist: PLAYLIST)
-parser.parse()
+let parser = M3UPlaylistParser()
+let playlist = parser.parse(string: PLAYLIST)
 ```
 [Go to content](#content)
 
@@ -60,8 +52,8 @@ import M3UKit
 let playlistLoader = M3UPlaylistLoader()
 playlistLoader.load(path: URL_TO_PLAYLIST) { response in
     switch response {
-    case let .success(parser):
-        print(parser.items)
+    case let .success(playlist):
+        print(playlist.items)
     case let .failure(error):
         print(error)
     }

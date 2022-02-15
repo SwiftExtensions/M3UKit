@@ -1,6 +1,6 @@
 //
 //  M3UPlaylistParserTests.swift
-//
+//  M3UKiteTests
 //
 //  Created by Александр Алгашев on 07.02.2022.
 //
@@ -20,17 +20,17 @@ class M3UPlaylistParserTests: XCTestCase {
     }
 
     func test_parsePlaylist_createsCorrectValues() throws {
-        self.sut.parse(playlist: .M3UPlaylist.demo)
+        let playlist = self.sut.parse(string: .M3UPlaylist.demo)
         
-        XCTAssertEqual(self.sut.lines, M3UDemoPlaylist.linesExample)
-        XCTAssertEqual(self.sut.items, M3UDemoPlaylist.itemsExample)
+        XCTAssertEqual(playlist.lines, M3UDemoPlaylist.linesExample)
+        XCTAssertEqual(playlist.items, M3UDemoPlaylist.itemsExample)
     }
     
     func test_parseData_createsCorrectValues() throws {
-        self.sut.parse(data: String.M3UPlaylist.demo.utf8EncodingData)
+        let playlist = self.sut.parse(data: String.M3UPlaylist.demo.utf8EncodingData)
         
-        XCTAssertEqual(self.sut.lines, M3UDemoPlaylist.linesExample)
-        XCTAssertEqual(self.sut.items, M3UDemoPlaylist.itemsExample)
+        XCTAssertEqual(playlist.lines, M3UDemoPlaylist.linesExample)
+        XCTAssertEqual(playlist.items, M3UDemoPlaylist.itemsExample)
     }
 
 //    func test_performance_parseChars() throws {

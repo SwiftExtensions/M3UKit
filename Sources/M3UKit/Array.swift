@@ -1,25 +1,23 @@
-import Foundation
-
-/// Extended M3U playlist lines converter to playlist items.
 //
-//  M3UPlaylistLinesConverter.swift
+//  Array.swift
 //  M3UKit
 //
 //  Created by Александр Алгашев on 23.01.2022.
 //
 
-struct M3UPlaylistLinesConverter {
-    /// Parsed lines of extended M3U playlist.
-    let lines: [M3UPlaylistLine]
-    
-    /// Builds extended M3U playlist items from playlist lines.
-    /// - Returns: Extended M3U playlist items from playlist lines.
+import Foundation
+
+public extension Array where Element == M3UPlaylistLine {
+    /**
+     Builds extended M3U playlist items from playlist lines.
+     - Returns: Extended M3U playlist items from playlist lines.
+     */
     func buildItems() -> [M3UPlaylistItem] {
         var runtime: TimeInterval?
         var title = ""
         var group: String?
         var items = [M3UPlaylistItem]()
-        lines.forEach { line in
+        self.forEach { line in
             switch line {
             case .extM3U:
                 break

@@ -14,13 +14,13 @@ extension M3UPlaylistLoader {
         /// Handles the extended M3U playlist response and returns result.
         /// - Parameter response: The raw extended M3U playlist request result.
         /// - Returns: The extended M3U playlist response handler result.
-        func handle(_ response: DataResult) -> ParserResult {
-            let result: ParserResult
+        func handle(_ response: DataResult) -> PlaylistResult {
+            let result: PlaylistResult
             switch response {
             case let .success(response):
-                var parser = M3UPlaylistParser()
-                parser.parse(data: response.data)
-                result = .success(parser)
+                let parser = M3UPlaylistParser()
+                let playlist = parser.parse(data: response.data)
+                result = .success(playlist)
             case let .failure(error):
                 result = .failure(error)
             }

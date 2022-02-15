@@ -15,9 +15,9 @@ public struct M3UPlaylistLoader {
     /// The raw extended M3U playlist request result.
     public typealias DataResult = Result<DataResponse, Swift.Error>
     /// The extended M3U playlist request result.
-    public typealias ParserResult = Result<M3UPlaylistParser, Swift.Error>
+    public typealias PlaylistResult = Result<M3UPlaylist, Swift.Error>
     /// The extended M3U playlist request completion closure.
-    public typealias Completion = (ParserResult) -> Void
+    public typealias Completion = (PlaylistResult) -> Void
     
     /// An object that coordinates a group of related, network data-transfer tasks.
     public let session: URLSession
