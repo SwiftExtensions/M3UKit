@@ -11,7 +11,7 @@ extension M3UPlaylistLineDecoder {
     /// The search continues until a character equal to the new line is found.
     ///
     /// More info see [M3U](https://en.wikipedia.org/wiki/M3U).
-    struct EndOfLineSeeker: M3UPlaylistLineParserState {
+    struct EndOfLineSeeker: M3UPlaylistLineDecoderState {
         let isAppendable: Bool
         let isExtTag: Bool
         let isRuntime: Bool
@@ -46,8 +46,8 @@ extension M3UPlaylistLineDecoder {
         /// More info see [M3U](https://en.wikipedia.org/wiki/M3U).
         static let trackInfoWithoutRuntime = EndOfLineSeeker(isAppendable: true, isExtTag: false, isRuntime: false)
         
-        func feed(_ char: Character) -> M3UPlaylistLineParserState {
-            let state: M3UPlaylistLineParserState
+        func feed(_ char: Character) -> M3UPlaylistLineDecoderState {
+            let state: M3UPlaylistLineDecoderState
             if char.isNewline {
                 state = EndOfLineState(isExtTag: false)
             } else {

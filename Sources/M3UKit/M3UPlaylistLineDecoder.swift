@@ -20,7 +20,7 @@ struct M3UPlaylistLineDecoder {
     /**
      An extended M3U playlist line decoder current state.
      */
-    private var state: M3UPlaylistLineParserState = StartSeeker()
+    private var state: M3UPlaylistLineDecoderState = StartSeeker()
     /**
      An extended M3U playlist tag of current line (_if available_).
      

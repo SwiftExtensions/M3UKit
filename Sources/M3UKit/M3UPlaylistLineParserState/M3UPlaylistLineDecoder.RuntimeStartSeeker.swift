@@ -13,14 +13,14 @@ extension M3UPlaylistLineDecoder {
     /// The spaces if any are skipped.
     ///
     /// More info see [M3U](https://en.wikipedia.org/wiki/M3U).
-    struct RuntimeStartSeeker: M3UPlaylistLineParserState {
+    struct RuntimeStartSeeker: M3UPlaylistLineDecoderState {
         let isAppendable = false
         let isExtTag = false
         let isRuntime = false
         let isEndOfLine = false
         
-        func feed(_ char: Character) -> M3UPlaylistLineParserState {
-            let state: M3UPlaylistLineParserState
+        func feed(_ char: Character) -> M3UPlaylistLineDecoderState {
+            let state: M3UPlaylistLineDecoderState
             if char.isNumber || char == "-" {
                 state = RuntimeState()
             } else if char == " " {

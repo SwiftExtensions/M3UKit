@@ -14,14 +14,14 @@ extension M3UPlaylistLineDecoder {
     /// A column indicates the end of another extended M3U tag.
     ///
     /// More info see [M3U](https://en.wikipedia.org/wiki/M3U).
-    struct ExtTagEndSeeker: M3UPlaylistLineParserState {
+    struct ExtTagEndSeeker: M3UPlaylistLineDecoderState {
         let isAppendable = true
         let isExtTag = false
         let isRuntime = false
         let isEndOfLine = false
         
-        func feed(_ char: Character) -> M3UPlaylistLineParserState {
-            let state: M3UPlaylistLineParserState
+        func feed(_ char: Character) -> M3UPlaylistLineDecoderState {
+            let state: M3UPlaylistLineDecoderState
             if char.isNewline {
                 state = EndOfLineState(isExtTag: true)
             } else if char == ":" {

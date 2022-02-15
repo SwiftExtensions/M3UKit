@@ -11,14 +11,14 @@ extension M3UPlaylistLineDecoder {
     /// The search continues while a character equal to a number is found.
     ///
     /// More info see [M3U](https://en.wikipedia.org/wiki/M3U).
-    struct RuntimeState: M3UPlaylistLineParserState {
+    struct RuntimeState: M3UPlaylistLineDecoderState {
         let isAppendable = true
         let isExtTag = false
         let isRuntime = false
         let isEndOfLine = false
         
-        func feed(_ char: Character) -> M3UPlaylistLineParserState {
-            let state: M3UPlaylistLineParserState
+        func feed(_ char: Character) -> M3UPlaylistLineDecoderState {
+            let state: M3UPlaylistLineDecoderState
             if char.isNumber {
                 state = self
             } else if char == "," || char == " " {
