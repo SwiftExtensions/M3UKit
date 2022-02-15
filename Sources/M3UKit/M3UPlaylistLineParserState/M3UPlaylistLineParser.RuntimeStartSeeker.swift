@@ -1,11 +1,11 @@
 //
-//  M3UPlaylistLineParser.RuntimeStartSeeker.swift
+//  M3UPlaylistLineDecoder.RuntimeStartSeeker.swift
 //  M3UKit
 //
 //  Created by Александр Алгашев on 23.01.2022.
 //
 
-extension M3UPlaylistLineParser {
+extension M3UPlaylistLineDecoder {
     /// The search for the runtime begining of `#EXTINF:` tag is underway.
     ///
     /// The search continues until a character equal to a number or a minus is found.

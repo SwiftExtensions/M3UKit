@@ -9,10 +9,10 @@ import XCTest
 @testable import M3UKit
 
 class RuntimeStartSeekerTests: XCTestCase {
-    var sut: M3UPlaylistLineParser.RuntimeStartSeeker!
+    var sut: M3UPlaylistLineDecoder.RuntimeStartSeeker!
 
     override func setUpWithError() throws {
-        self.sut = M3UPlaylistLineParser.RuntimeStartSeeker()
+        self.sut = M3UPlaylistLineDecoder.RuntimeStartSeeker()
     }
 
     override func tearDownWithError() throws {
@@ -28,7 +28,7 @@ class RuntimeStartSeekerTests: XCTestCase {
     
     func test_feed_number_returnsCorrectState() {
         let state = self.sut.feed("1")
-        XCTAssertNotNil(state as? M3UPlaylistLineParser.RuntimeState)
+        XCTAssertNotNil(state as? M3UPlaylistLineDecoder.RuntimeState)
         XCTAssertTrue(state.isAppendable)
         XCTAssertFalse(state.isExtTag)
         XCTAssertFalse(state.isRuntime)
@@ -37,7 +37,7 @@ class RuntimeStartSeekerTests: XCTestCase {
     
     func test_feed_minus_returnsCorrectState() {
         let state = self.sut.feed("-")
-        XCTAssertNotNil(state as? M3UPlaylistLineParser.RuntimeState)
+        XCTAssertNotNil(state as? M3UPlaylistLineDecoder.RuntimeState)
         XCTAssertTrue(state.isAppendable)
         XCTAssertFalse(state.isExtTag)
         XCTAssertFalse(state.isRuntime)
@@ -46,12 +46,12 @@ class RuntimeStartSeekerTests: XCTestCase {
     
     func test_feed_space_returnsCorrectState() {
         let state = self.sut.feed(" ")
-        XCTAssertNotNil(state as? M3UPlaylistLineParser.RuntimeStartSeeker)
+        XCTAssertNotNil(state as? M3UPlaylistLineDecoder.RuntimeStartSeeker)
     }
 
     func test_feed_character_returnsCorrectState() {
         let state = self.sut.feed("h")
-        XCTAssertNotNil(state as? M3UPlaylistLineParser.EndOfLineSeeker)
+        XCTAssertNotNil(state as? M3UPlaylistLineDecoder.EndOfLineSeeker)
         XCTAssertTrue(state.isAppendable)
         XCTAssertFalse(state.isExtTag)
         XCTAssertFalse(state.isRuntime)

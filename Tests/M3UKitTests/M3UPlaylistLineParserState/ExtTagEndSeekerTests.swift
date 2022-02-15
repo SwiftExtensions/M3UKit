@@ -9,10 +9,10 @@ import XCTest
 @testable import M3UKit
 
 class ExtTagEndSeekerTests: XCTestCase {
-    var sut: M3UPlaylistLineParser.ExtTagEndSeeker!
+    var sut: M3UPlaylistLineDecoder.ExtTagEndSeeker!
 
     override func setUpWithError() throws {
-        self.sut = M3UPlaylistLineParser.ExtTagEndSeeker()
+        self.sut = M3UPlaylistLineDecoder.ExtTagEndSeeker()
     }
 
     override func tearDownWithError() throws {
@@ -28,7 +28,7 @@ class ExtTagEndSeekerTests: XCTestCase {
     
     func test_feed_newLine_returnsCorrectState() {
         let state = self.sut.feed("\n")
-        XCTAssertNotNil(state as? M3UPlaylistLineParser.EndOfLineState)
+        XCTAssertNotNil(state as? M3UPlaylistLineDecoder.EndOfLineState)
         XCTAssertFalse(state.isAppendable)
         XCTAssertTrue(state.isExtTag)
         XCTAssertFalse(state.isRuntime)
@@ -37,7 +37,7 @@ class ExtTagEndSeekerTests: XCTestCase {
     
     func test_feed_column_returnsCorrectState() {
         let state = self.sut.feed(":")
-        XCTAssertNotNil(state as? M3UPlaylistLineParser.EndOfLineSeeker)
+        XCTAssertNotNil(state as? M3UPlaylistLineDecoder.EndOfLineSeeker)
         XCTAssertTrue(state.isAppendable)
         XCTAssertTrue(state.isExtTag)
         XCTAssertFalse(state.isRuntime)
@@ -46,7 +46,7 @@ class ExtTagEndSeekerTests: XCTestCase {
 
     func test_feed_character_returnsCorrectState() {
         let state = self.sut.feed("h")
-        XCTAssertNotNil(state as? M3UPlaylistLineParser.ExtTagEndSeeker)
+        XCTAssertNotNil(state as? M3UPlaylistLineDecoder.ExtTagEndSeeker)
         XCTAssertTrue(state.isAppendable)
         XCTAssertFalse(state.isExtTag)
         XCTAssertFalse(state.isRuntime)

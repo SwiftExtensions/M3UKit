@@ -1,11 +1,11 @@
 //
-//  M3UPlaylistLineParser.StartSeeker.swift
+//  M3UPlaylistLineDecoder.StartSeeker.swift
 //  M3UKit
 //
 //  Created by Александр Алгашев on 23.01.2022.
 //
 
-extension M3UPlaylistLineParser {
+extension M3UPlaylistLineDecoder {
     /// The search for the beginning of the line is underway.
     ///
     /// The search continues until a character not equal to the new line is found.

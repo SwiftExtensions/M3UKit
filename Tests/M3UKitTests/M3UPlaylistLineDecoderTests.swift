@@ -1,6 +1,6 @@
 //
-//  M3UPlaylistLineParserTests.swift
-//  
+//  M3UPlaylistLineDecoderTests.swift
+//  M3UKiteTests
 //
 //  Created by Александр Алгашев on 09.01.2022.
 //
@@ -8,11 +8,11 @@
 import XCTest
 @testable import M3UKit
 
-class M3UPlaylistLineParserTests: XCTestCase {
-    var sut: M3UPlaylistLineParser!
+class M3UPlaylistLineDecoderTests: XCTestCase {
+    var sut: M3UPlaylistLineDecoder!
 
     override func setUpWithError() throws {
-        self.sut = M3UPlaylistLineParser()
+        self.sut = M3UPlaylistLineDecoder()
     }
 
     override func tearDownWithError() throws {
@@ -69,7 +69,7 @@ class M3UPlaylistLineParserTests: XCTestCase {
                 return
             } else if let line = self.sut.line {
                 lines.append(line)
-                self.sut = M3UPlaylistLineParser()
+                self.sut = M3UPlaylistLineDecoder()
             }
         }
         

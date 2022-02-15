@@ -9,10 +9,10 @@ import XCTest
 @testable import M3UKit
 
 class StartSeekerTests: XCTestCase {
-    var sut: M3UPlaylistLineParser.StartSeeker!
+    var sut: M3UPlaylistLineDecoder.StartSeeker!
 
     override func setUpWithError() throws {
-        self.sut = M3UPlaylistLineParser.StartSeeker()
+        self.sut = M3UPlaylistLineDecoder.StartSeeker()
     }
 
     override func tearDownWithError() throws {
@@ -28,12 +28,12 @@ class StartSeekerTests: XCTestCase {
     
     func test_feed_hash_returnsCorrectState() {
         let state = self.sut.feed("#")
-        XCTAssertNotNil(state as? M3UPlaylistLineParser.ExtTagEndSeeker)
+        XCTAssertNotNil(state as? M3UPlaylistLineDecoder.ExtTagEndSeeker)
     }
     
     func test_feed_character_returnsCorrectState() {
         let state = self.sut.feed("h")
-        XCTAssertNotNil(state as? M3UPlaylistLineParser.EndOfLineSeeker)
+        XCTAssertNotNil(state as? M3UPlaylistLineDecoder.EndOfLineSeeker)
         XCTAssertTrue(state.isAppendable)
         XCTAssertFalse(state.isExtTag)
         XCTAssertFalse(state.isRuntime)
@@ -42,7 +42,7 @@ class StartSeekerTests: XCTestCase {
     
     func test_feed_newLine_returnsCorrectState() {
         let state = self.sut.feed("\n")
-        XCTAssertNotNil(state as? M3UPlaylistLineParser.StartSeeker)
+        XCTAssertNotNil(state as? M3UPlaylistLineDecoder.StartSeeker)
     }
 
 

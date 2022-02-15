@@ -1,11 +1,11 @@
 //
-//  M3UPlaylistLineParser.EndOfLineSeeker.swift
+//  M3UPlaylistLineDecoder.EndOfLineSeeker.swift
 //  M3UKit
 //
 //  Created by Александр Алгашев on 23.01.2022.
 //
 
-extension M3UPlaylistLineParser {
+extension M3UPlaylistLineDecoder {
     /// The search for the end of M3U playlist line is underway.
     ///
     /// The search continues until a character equal to the new line is found.
