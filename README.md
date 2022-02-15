@@ -40,7 +40,7 @@ For more information, see [`Adding Package Dependencies to Your App`](https://de
 import M3UKit
 
 let decoder = M3UPlaylistDecoder()
-let playlist = decoder.parse(string: PLAYLIST)
+let playlist = decoder.decode(string: PLAYLIST)
 ```
 [Go to content](#content)
 

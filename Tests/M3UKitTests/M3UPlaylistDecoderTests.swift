@@ -20,14 +20,14 @@ class M3UPlaylistDecoderTests: XCTestCase {
     }
 
     func test_parsePlaylist_createsCorrectValues() throws {
-        let playlist = self.sut.parse(string: .M3UPlaylist.demo)
+        let playlist = self.sut.decode(string: .M3UPlaylist.demo)
         
         XCTAssertEqual(playlist.lines, M3UDemoPlaylist.linesExample)
         XCTAssertEqual(playlist.items, M3UDemoPlaylist.itemsExample)
     }
     
     func test_parseData_createsCorrectValues() throws {
-        let playlist = self.sut.parse(data: String.M3UPlaylist.demo.utf8EncodingData)
+        let playlist = self.sut.decode(data: String.M3UPlaylist.demo.utf8EncodingData)
         
         XCTAssertEqual(playlist.lines, M3UDemoPlaylist.linesExample)
         XCTAssertEqual(playlist.items, M3UDemoPlaylist.itemsExample)
@@ -36,7 +36,7 @@ class M3UPlaylistDecoderTests: XCTestCase {
 //    func test_performance_parseChars() throws {
 //        // This is an example of a performance test case.
 //        self.measure {
-//            self.sut.parse(playlist: M3UDemoPlaylist.example)
+//            self.sut.decode(playlist: M3UDemoPlaylist.example)
 //        }
 //    }
 //
