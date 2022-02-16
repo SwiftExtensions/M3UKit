@@ -23,6 +23,17 @@ public enum M3UPlaylistLine: Equatable {
      */
     static let extInf = M3UPlaylistLine.extInf(runtime: nil, title: "")
     /**
+     The empty begin named grouping line.
+     
+     Example:
+     ```
+     #EXTGRP:Foreign Channels
+     ```
+     More info see [M3U](https://en.wikipedia.org/wiki/M3U).
+     */
+    static let extGrp = M3UPlaylistLine.extGrp(group: "")
+    
+    /**
      The file header, must be the first line of the file.
      
      Example:

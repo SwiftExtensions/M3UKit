@@ -53,7 +53,7 @@ public enum M3UExtTag: String {
         case .extInf:
             line = .extInf
         case .extGrp:
-            line = .extGrp(group: "")
+            line = .extGrp
         }
         
         return line
