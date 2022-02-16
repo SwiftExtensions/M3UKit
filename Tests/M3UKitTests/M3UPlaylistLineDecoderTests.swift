@@ -31,7 +31,7 @@ class M3UPlaylistLineDecoderTests: XCTestCase {
     
     func test_parseEXTINF_correctParsing() throws {
         let extInf = "#EXTINF:-1,Ultra HD Cinema 4K UHD"
-        let expectedLine = M3UPlaylistLine.extInf(-1, "Ultra HD Cinema 4K UHD")
+        let expectedLine = M3UPlaylistLine.extInf(runtime: -1, title: "Ultra HD Cinema 4K UHD")
         extInf.forEach {
             _ = self.sut.feed($0)
         }

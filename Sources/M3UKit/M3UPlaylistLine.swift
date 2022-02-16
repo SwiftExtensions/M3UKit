@@ -30,8 +30,12 @@ public enum M3UPlaylistLine: Equatable {
      #EXTINF:123,Artist Name – Track Title
      ```
      More info see [M3U](https://en.wikipedia.org/wiki/M3U).
+     
+     - Parameters:
+       - runtime: The track runtime in seconds, if any.
+       - title: The track title.
      */
-    case extInf(_ runtime: TimeInterval?, _ title: String)
+    case extInf(runtime: TimeInterval?, title: String)
     /**
      The begin named grouping.
      

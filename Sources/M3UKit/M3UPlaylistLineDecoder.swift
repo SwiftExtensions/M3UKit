@@ -86,11 +86,11 @@ struct M3UPlaylistLineDecoder {
     private mutating func buildLine(of extTag: M3UExtTag) {
         switch extTag {
         case .extM3U:
-            self.line = M3UPlaylistLine.extM3U
+            self.line = .extM3U
         case .extInf:
-            self.line = M3UPlaylistLine.extInf(self.runtime, self.collector)
+            self.line = .extInf(runtime: self.runtime, title: self.collector)
         case .extGrp:
-            self.line = M3UPlaylistLine.extGrp(self.collector)
+            self.line = .extGrp(self.collector)
         }
     }
     
