@@ -44,8 +44,10 @@ public enum M3UPlaylistLine: Equatable {
      #EXTGRP:Foreign Channels
      ```
      More info see [M3U](https://en.wikipedia.org/wiki/M3U).
+     - Parameters:
+       - group: The begin named grouping.
      */
-    case extGrp(_ group: String)
+    case extGrp(group: String)
     /**
      The track resource.
      

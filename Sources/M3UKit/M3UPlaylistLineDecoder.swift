@@ -90,7 +90,7 @@ struct M3UPlaylistLineDecoder {
         case .extInf:
             self.line = .extInf(runtime: self.runtime, title: self.collector)
         case .extGrp:
-            self.line = .extGrp(self.collector)
+            self.line = .extGrp(group: self.collector)
         }
     }
     

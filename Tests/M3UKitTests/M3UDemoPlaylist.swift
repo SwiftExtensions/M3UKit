@@ -14,10 +14,10 @@ struct M3UDemoPlaylist {
         .extInf(runtime: -1, title: "=== Обновлён: 30.12.2021 === smarttvnews.ru ==="),
         .resource("https://smarttvnews.ru/wp-content/uploads/2018/11/BT-2016-logo_color7890.png"),
         .extInf(runtime: -1, title: "Ultra HD Cinema 4K UHD"),
-        .extGrp("Кино"),
+        .extGrp(group: "Кино"),
         .resource("http://zabava-htlive.cdn.ngenix.net/hls/CH_ULTRAHDCINEMA_HLS/bw20000000/variant.m3u8?version=2"),
         .extInf(runtime: -1, title: "ULTRA REX 4K UHD"),
-        .extGrp("Кино"),
+        .extGrp(group: "Кино"),
         .resource("https://zabava-htlive.cdn.ngenix.net/hls/CH_RUSSIANEXTREMEULTRA_HLS/bw20000000/variant.m3u8?version=2")
     ]
     

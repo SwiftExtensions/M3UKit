@@ -42,7 +42,7 @@ class M3UPlaylistLineDecoderTests: XCTestCase {
     
     func test_parseEXTGRP_correctParsing() throws {
         let extGrp = "#EXTGRP:Кино"
-        let expectedLine = M3UPlaylistLine.extGrp("Кино")
+        let expectedLine = M3UPlaylistLine.extGrp(group: "Кино")
         extGrp.forEach {
             _ = self.sut.feed($0)
         }
