@@ -62,6 +62,98 @@ public enum M3UPlaylistLine: Equatable {
        - path: The track resource path.
      */
     case resource(path: String)
+    /**
+     The unrecognized tag.
+     
+     - Parameters:
+       - name: The tag name.
+       - title: The tag value.
+     */
+    case unknownTag(name: String, value: String)
+    
+    /**
+     The flag of a track information tag.
+     
+     Example:
+     ```
+     #EXTINF:123,Artist Name – Track Title
+     ```
+     More info see [M3U](https://en.wikipedia.org/wiki/M3U).
+     */
+    var isExtInf: Bool {
+        let isExtInf: Bool
+        if case .extInf(_, _) = self {
+            isExtInf = true
+        } else {
+            isExtInf = false
+        }
+        
+        return isExtInf
+    }
+    
+    /**
+     Sets the runtime of a track information tag.
+     
+     Example:
+     ```
+     #EXTINF:123,Artist Name – Track Title
+     ```
+     More info see [M3U](https://en.wikipedia.org/wiki/M3U).
+     
+     - Parameters:
+       - runtime: The track runtime in seconds (_string representation_).
+     */
+    mutating func setRuntime(_ runtime: String) {
+        if case .extInf(_, _) = self {
+            let runtime = TimeInterval(runtime)
+            self = .extInf(runtime: runtime, title: "")
+        }
+    }
+    
+    mutating func complete(value: String) {
+        switch self {
+        case let .extInf(runtime, _):
+            self = .extInf(runtime: runtime, title: value)
+        case .extGrp(_):
+            self = .extGrp(group: value)
+        case let .unknownTag(name, _):
+            self = .unknownTag(name: name, value: value)
+        default:
+            break
+        }
+    }
+    
+    
+}
+
+extension M3UPlaylistLine {
+    /**
+     Creates an extended M3U playlist line from tag value.
+     
+     - Parameters:
+       - tag: Tag name string representation.
+     */
+    init(tag: String) {
+        if let line = M3UExtTag(rawValue: tag)?.buildLine() {
+            self = line
+        } else {
+            self = .unknownTag(name: tag, value: "")
+        }
+    }
+    
+    /**
+     Creates an extended M3U playlist line from string representation of line value.
+     
+     - Parameters:
+       - tag: Tag name string representation.
+     */
+    init(line: String) {
+        if let line = M3UExtTag(rawValue: line)?.buildLine() {
+            self = line
+        } else {
+            self = .resource(path: line)
+        }
+    }
     
     
 }

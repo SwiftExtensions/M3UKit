@@ -42,5 +42,22 @@ public enum M3UExtTag: String {
      */
     case extGrp = "#EXTGRP:"
     
+    /**
+     Creates the extended M3U playlist line according to the tag value.
+     */
+    func buildLine() -> M3UPlaylistLine {
+        let line: M3UPlaylistLine
+        switch self {
+        case .extM3U:
+            line = .extM3U
+        case .extInf:
+            line = .extInf(runtime: nil, title: "")
+        case .extGrp:
+            line = .extGrp(group: "")
+        }
+        
+        return line
+    }
+    
     
 }

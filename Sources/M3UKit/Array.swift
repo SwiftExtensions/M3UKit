@@ -36,6 +36,8 @@ public extension Array where Element == M3UPlaylistLine {
                 items.append(item)
                 runtime = nil
                 title = ""
+            case .unknownTag(name: _, value: _):
+                break
             }
         }
         
