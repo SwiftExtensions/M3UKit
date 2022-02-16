@@ -26,6 +26,13 @@ class M3UPlaylistDecoderTests: XCTestCase {
         XCTAssertEqual(playlist.items, M3UDemoPlaylist.itemsExample)
     }
     
+    func test_parsePlaylist_invalidTag_createsCorrectValues() throws {
+        let playlist = self.sut.decode(string: .M3UPlaylist.demoWithInvalidTag)
+        
+        XCTAssertEqual(playlist.lines, M3UDemoPlaylist.linesInvalidTagExample)
+        XCTAssertEqual(playlist.items, M3UDemoPlaylist.itemsExample)
+    }
+    
     func test_parseData_createsCorrectValues() throws {
         let playlist = self.sut.decode(data: String.M3UPlaylist.demo.utf8EncodingData)
         

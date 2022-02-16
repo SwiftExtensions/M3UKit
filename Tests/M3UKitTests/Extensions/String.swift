@@ -27,6 +27,7 @@ extension String {
 extension String {
     struct M3UPlaylist {
         static let demo = String(playlist: "demo")
+        static let demoWithInvalidTag = String(playlist: "demoWithInvalidTag")
     }
     
     

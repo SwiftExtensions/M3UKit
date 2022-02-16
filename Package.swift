@@ -33,7 +33,8 @@ let package = Package(
             name: "M3UKitTests",
             dependencies: ["M3UKit"],
             resources: [
-                .copy("Resources/demo.m3u")
+                .copy("Resources/demo.m3u"),
+                .copy("Resources/demoWithInvalidTag.m3u")
             ]),
     ]
 )
