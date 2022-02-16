@@ -51,7 +51,7 @@ public enum M3UExtTag: String {
         case .extM3U:
             line = .extM3U
         case .extInf:
-            line = .extInf(runtime: nil, title: "")
+            line = .extInf
         case .extGrp:
             line = .extGrp(group: "")
         }

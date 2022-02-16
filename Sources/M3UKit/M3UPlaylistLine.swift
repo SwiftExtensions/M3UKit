@@ -13,6 +13,16 @@ import Foundation
  */
 public enum M3UPlaylistLine: Equatable {
     /**
+     The empty track information line: `runtime` is `nil` and display `title` is empty.
+     
+     Example:
+     ```
+     #EXTINF:123,Artist Name – Track Title
+     ```
+     More info see [M3U](https://en.wikipedia.org/wiki/M3U).
+     */
+    static let extInf = M3UPlaylistLine.extInf(runtime: nil, title: "")
+    /**
      The file header, must be the first line of the file.
      
      Example:
