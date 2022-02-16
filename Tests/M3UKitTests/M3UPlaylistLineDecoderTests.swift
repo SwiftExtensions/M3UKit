@@ -53,7 +53,7 @@ class M3UPlaylistLineDecoderTests: XCTestCase {
     
     func test_parseResource_correctParsing() throws {
         let resource = "http://zabava-htlive.cdn.ngenix.net/hls/CH_ULTRAHDCINEMA_HLS/bw20000000/variant.m3u8?version=2"
-        let expectedLine = M3UPlaylistLine.resource(resource)
+        let expectedLine = M3UPlaylistLine.resource(path: resource)
         resource.forEach {
             _ = self.sut.feed($0)
         }

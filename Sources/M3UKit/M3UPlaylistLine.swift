@@ -44,6 +44,7 @@ public enum M3UPlaylistLine: Equatable {
      #EXTGRP:Foreign Channels
      ```
      More info see [M3U](https://en.wikipedia.org/wiki/M3U).
+     
      - Parameters:
        - group: The begin named grouping.
      */
@@ -56,8 +57,11 @@ public enum M3UPlaylistLine: Equatable {
      artist - title.mp3
      ```
      More info see [M3U](https://en.wikipedia.org/wiki/M3U).
+     
+     - Parameters:
+       - path: The track resource path.
      */
-    case resource(_ string: String)
+    case resource(path: String)
     
     
 }

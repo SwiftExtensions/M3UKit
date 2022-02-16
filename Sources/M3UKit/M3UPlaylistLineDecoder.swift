@@ -75,7 +75,7 @@ struct M3UPlaylistLineDecoder {
         } else if let extTag = M3UExtTag(rawValue: self.collector) {
             self.buildLine(of: extTag)
         } else {
-            self.line = M3UPlaylistLine.resource(self.collector)
+            self.line = .resource(path: self.collector)
         }
     }
     
