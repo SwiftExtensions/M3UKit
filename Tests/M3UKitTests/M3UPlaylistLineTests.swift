@@ -35,5 +35,14 @@ class M3UPlaylistLineTests: XCTestCase {
         XCTAssertTrue(self.sut.isExtInf)
     }
     
+    func test_setRuntime_setsRuntime() {
+        let runtime: TimeInterval = 123
+        let epectedLine = M3UPlaylistLine.extInf(runtime: runtime, title: "")
+        self.sut = .extInf
+        self.sut.setRuntime(String(runtime))
+        
+        XCTAssertEqual(self.sut, epectedLine)
+    }
+    
 
 }
