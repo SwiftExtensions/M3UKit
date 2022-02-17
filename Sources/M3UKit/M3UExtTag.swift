@@ -6,8 +6,22 @@
 //
 
 /**
- An extended M3U playlist tag.
- More info see [M3U](https://en.wikipedia.org/wiki/M3U).
+ An extended
+ [M3U](https://en.wikipedia.org/wiki/M3U) playlist tag.
+ 
+ Supported tags:
+ - `#EXTM3U` - ``extM3U``;
+ - `#EXTINF:` - ``extInf``;
+ - `#EXTGRP:` - ``extGrp``.
+ 
+ An extended
+ [M3U](https://en.wikipedia.org/wiki/M3U) playlist example:
+ ```
+ #EXTM3U
+ #EXTINF:123,Artist Name – Track Title
+ #EXTGRP:Foreign Channels
+ artist - title.mp3
+ ```
  */
 public enum M3UExtTag: String {
     /**
@@ -43,7 +57,9 @@ public enum M3UExtTag: String {
     case extGrp = "#EXTGRP:"
     
     /**
-     Creates the extended M3U playlist line according to the tag value.
+     Creates the extended
+     [M3U](https://en.wikipedia.org/wiki/M3U)
+     playlist line according to the tag value.
      */
     func buildLine() -> M3UPlaylistLine {
         let line: M3UPlaylistLine
