@@ -130,7 +130,21 @@ public enum M3UPlaylistLine: Equatable {
             self = .extInf(runtime: runtime, title: "")
         }
     }
-    
+    /**
+     Completes line by adding last (_final_) part of
+     an extended [M3U](https://en.wikipedia.org/wiki/M3U)
+     playlist line.
+     
+     Actual for:
+     - an ``extInf(runtime:title:)`` line;
+     - an ``extGrp(group:)`` line;
+     - and an ``unknownTag(name:value:)`` line;
+     
+     - Parameters:
+       - value: A last (_final_) part of
+     an extended [M3U](https://en.wikipedia.org/wiki/M3U)
+     playlist line.
+     */
     mutating func complete(value: String) {
         switch self {
         case let .extInf(runtime, _):
