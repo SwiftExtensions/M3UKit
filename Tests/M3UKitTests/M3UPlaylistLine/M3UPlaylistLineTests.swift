@@ -114,3 +114,37 @@ extension M3UPlaylistLineTests {
     
 
 }
+
+// MARK: - initTag tests
+
+extension M3UPlaylistLineTests {
+    func test_initTag_unknownTag_createsCorrectLine() {
+        let tag = "Invalid"
+        self.sut = M3UPlaylistLine(tag: "Invalid")
+        let expectedLine = M3UPlaylistLine.unknownTag(name: tag, value: "")
+        
+        XCTAssertEqual(self.sut, expectedLine)
+    }
+    
+    func test_initTag_validTag_createsCorrectLine() {
+        var tag = M3UExtTag.extM3U.rawValue
+        self.sut = M3UPlaylistLine(tag: tag)
+        var expectedLine = M3UPlaylistLine.extM3U
+        
+        XCTAssertEqual(self.sut, expectedLine)
+        
+        tag = M3UExtTag.extInf.rawValue
+        self.sut = M3UPlaylistLine(tag: tag)
+        expectedLine = .extInf
+        
+        XCTAssertEqual(self.sut, expectedLine)
+        
+        tag = M3UExtTag.extGrp.rawValue
+        self.sut = M3UPlaylistLine(tag: tag)
+        expectedLine = .extGrp
+        
+        XCTAssertEqual(self.sut, expectedLine)
+    }
+    
+
+}
