@@ -44,7 +44,7 @@ extension M3UPlaylistLineTests {
     
 }
 
-// MARK: - setRuntime tests
+// MARK: - setRuntime(_:) tests
 
 extension M3UPlaylistLineTests {
     func test_setRuntime_invalidLine_throws() {
@@ -68,7 +68,7 @@ extension M3UPlaylistLineTests {
 
 }
 
-// MARK: - complete tests
+// MARK: - complete(value:) tests
 
 extension M3UPlaylistLineTests {
     func test_complete_invalidLine_throws() {
@@ -115,12 +115,12 @@ extension M3UPlaylistLineTests {
 
 }
 
-// MARK: - initTag tests
+// MARK: - init(tag:) tests
 
 extension M3UPlaylistLineTests {
     func test_initTag_unknownTag_createsCorrectLine() {
         let tag = "Invalid"
-        self.sut = M3UPlaylistLine(tag: "Invalid")
+        self.sut = M3UPlaylistLine(tag: tag)
         let expectedLine = M3UPlaylistLine.unknownTag(name: tag, value: "")
         
         XCTAssertEqual(self.sut, expectedLine)
@@ -141,6 +141,40 @@ extension M3UPlaylistLineTests {
         
         tag = M3UExtTag.extGrp.rawValue
         self.sut = M3UPlaylistLine(tag: tag)
+        expectedLine = .extGrp
+        
+        XCTAssertEqual(self.sut, expectedLine)
+    }
+    
+
+}
+
+// MARK: - init(line:) tests
+
+extension M3UPlaylistLineTests {
+    func test_initLine_invalidTag_createsCorrectLine() {
+        let line = "Some resource"
+        self.sut = M3UPlaylistLine(line: line)
+        let expectedLine = M3UPlaylistLine.resource(path: line)
+        
+        XCTAssertEqual(self.sut, expectedLine)
+    }
+    
+    func test_initLine_validTag_createsCorrectLine() {
+        var tag = M3UExtTag.extM3U.rawValue
+        self.sut = M3UPlaylistLine(line: tag)
+        var expectedLine = M3UPlaylistLine.extM3U
+        
+        XCTAssertEqual(self.sut, expectedLine)
+        
+        tag = M3UExtTag.extInf.rawValue
+        self.sut = M3UPlaylistLine(line: tag)
+        expectedLine = .extInf
+        
+        XCTAssertEqual(self.sut, expectedLine)
+        
+        tag = M3UExtTag.extGrp.rawValue
+        self.sut = M3UPlaylistLine(line: tag)
         expectedLine = .extGrp
         
         XCTAssertEqual(self.sut, expectedLine)
