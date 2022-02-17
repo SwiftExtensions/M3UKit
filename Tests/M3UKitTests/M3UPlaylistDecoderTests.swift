@@ -43,14 +43,14 @@ class M3UPlaylistDecoderTests: XCTestCase {
 //    func test_performance_parseChars() throws {
 //        // This is an example of a performance test case.
 //        self.measure {
-//            self.sut.decode(playlist: M3UDemoPlaylist.example)
+//            _ = self.sut.decode(string: String.M3UPlaylist.freeiptv)
 //        }
 //    }
 //
 //    func test_performance_parseStandart() throws {
 //        // This is an example of a performance test case.
 //        self.measure {
-//            _ = M3UDemoPlaylist.example.split(whereSeparator: \.isNewline)
+//            _ = String.M3UPlaylist.freeiptv.split(whereSeparator: \.isNewline)
 //        }
 //    }
 

@@ -34,7 +34,8 @@ let package = Package(
             dependencies: ["M3UKit"],
             resources: [
                 .copy("Resources/demo.m3u"),
-                .copy("Resources/demoWithInvalidTag.m3u")
+                .copy("Resources/demoWithInvalidTag.m3u"),
+                .copy("Resources/freeiptv.m3u")
             ]),
     ]
 )
