@@ -8,7 +8,7 @@
 import Foundation
 
 class MockURLSession: URLProtocol {
-    static var results = [String : Result]()
+    static var results = SafeDictionary<String, Result>()
     
     override class func canInit(with request: URLRequest) -> Bool {
         MockURLSession.results[request.url?.absoluteString ?? ""] != nil
