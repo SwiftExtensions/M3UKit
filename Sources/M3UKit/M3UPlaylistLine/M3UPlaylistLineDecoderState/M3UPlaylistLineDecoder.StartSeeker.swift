@@ -23,7 +23,7 @@ extension M3UPlaylistLineDecoder {
             let state: M3UPlaylistLineDecoderState
             if char == "#" {
                 state = ExtTagEndSeeker()
-            } else if !char.isNewline {
+            } else if !char.isNewline && char != " " {
                 state = EndOfLineSeeker.resource
             } else {
                 state = self
