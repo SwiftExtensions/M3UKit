@@ -36,7 +36,7 @@ struct M3UPlaylistLineDecoder {
     /**
      An extended M3U playlist line.
      */
-    private(set) var line: M3UPlaylistLine!
+    private(set) var line: M3UPlaylistLine?
     
     /**
      Analyzes an extended M3U playlist line character.
@@ -50,13 +50,14 @@ struct M3UPlaylistLineDecoder {
             self.collector.append(char)
         }
         if self.state.isExtTag {
-            self.line = M3UPlaylistLine(tag: self.collector)
-            if self.line.isExtInf {
+            let line = M3UPlaylistLine(tag: self.collector)
+            if line.isExtInf {
                 self.state = RuntimeStartSeeker()
             }
+            self.line = line
             self.collector = ""
         } else if self.state.isRuntime {
-            self.line.setRuntime(self.collector)
+            self.line?.setRuntime(self.collector)
             self.collector = ""
         }
         if self.state.isEndOfLine {
@@ -73,7 +74,7 @@ struct M3UPlaylistLineDecoder {
         if self.line == nil {
             self.line = M3UPlaylistLine(line: self.collector)
         } else {
-            self.line.complete(value: self.collector)
+            self.line?.complete(value: self.collector)
         }
     }
     
