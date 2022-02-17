@@ -47,20 +47,20 @@ extension M3UPlaylistLineTests {
 // MARK: - setRuntime(_:) tests
 
 extension M3UPlaylistLineTests {
-    func test_setRuntime_invalidLine_throws() {
+    func test_setRuntime_invalidLine_throws() throws {
         self.sut = .extM3U
         let expectedError = M3UPlaylistLine.Error.runtimeNotFound(line: .extM3U)
         
         XCTAssertThrowsError(try self.sut.setRuntime("-1")) { error in
-            XCTAssertEqual(error as? M3UPlaylistLine.Error, expectedError)
+            XCTAssertEqual(error as! M3UPlaylistLine.Error, expectedError)
         }
     }
     
-    func test_setRuntime_setsRuntime() {
+    func test_setRuntime_setsRuntime() throws {
         let runtime: TimeInterval = 123
         let expectedLine = M3UPlaylistLine.extInf(runtime: runtime, title: "")
         self.sut = .extInf
-        try? self.sut.setRuntime(String(runtime))
+        try! self.sut.setRuntime(String(runtime))
         
         XCTAssertEqual(self.sut, expectedLine)
     }
@@ -71,43 +71,43 @@ extension M3UPlaylistLineTests {
 // MARK: - complete(value:) tests
 
 extension M3UPlaylistLineTests {
-    func test_complete_invalidLine_throws() {
+    func test_complete_invalidLine_throws() throws {
         self.sut = .extM3U
         let expectedError = M3UPlaylistLine.Error.invalidCompletionCall(line: .extM3U)
         
         XCTAssertThrowsError(try self.sut.complete(value: "Test")) { error in
-            XCTAssertEqual(error as? M3UPlaylistLine.Error, expectedError)
+            XCTAssertEqual(error as! M3UPlaylistLine.Error, expectedError)
         }
     }
     
-    func test_complete_extInf_setsValue() {
+    func test_complete_extInf_setsValue() throws {
         let runtime: TimeInterval = -1
         let title = "Test"
         let expectedLine = M3UPlaylistLine.extInf(runtime: runtime, title: title)
         
         self.sut = M3UPlaylistLine.extInf(runtime: runtime, title: "")
-        try? self.sut.complete(value: title)
+        try! self.sut.complete(value: title)
         
         XCTAssertEqual(self.sut, expectedLine)
     }
     
-    func test_complete_extGrp_setsValue() {
+    func test_complete_extGrp_setsValue() throws {
         let group = "Test"
         let expectedLine = M3UPlaylistLine.extGrp(group: group)
         
         self.sut = M3UPlaylistLine.extGrp
-        try? self.sut.complete(value: group)
+        try! self.sut.complete(value: group)
         
         XCTAssertEqual(self.sut, expectedLine)
     }
     
-    func test_complete_unknownTag_setsValue() {
+    func test_complete_unknownTag_setsValue() throws {
         let name = "Test Name"
         let value = "Test Vame"
         let expectedLine = M3UPlaylistLine.unknownTag(name: name, value: value)
         
         self.sut = M3UPlaylistLine.unknownTag(name: name, value: "")
-        try? self.sut.complete(value: value)
+        try! self.sut.complete(value: value)
         
         XCTAssertEqual(self.sut, expectedLine)
     }

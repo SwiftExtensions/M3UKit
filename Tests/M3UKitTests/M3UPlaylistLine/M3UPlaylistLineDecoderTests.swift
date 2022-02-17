@@ -24,7 +24,7 @@ class M3UPlaylistLineDecoderTests: XCTestCase {
         extM3U.forEach {
             _ = self.sut.feed($0)
         }
-        self.sut.buildLine()
+        try self.sut.buildLine()
         
         XCTAssertEqual(self.sut.line, M3UPlaylistLine.extM3U)
     }
@@ -35,7 +35,7 @@ class M3UPlaylistLineDecoderTests: XCTestCase {
         extInf.forEach {
             _ = self.sut.feed($0)
         }
-        self.sut.buildLine()
+        try self.sut.buildLine()
         
         XCTAssertEqual(self.sut.line, expectedLine)
     }
@@ -46,7 +46,7 @@ class M3UPlaylistLineDecoderTests: XCTestCase {
         extGrp.forEach {
             _ = self.sut.feed($0)
         }
-        self.sut.buildLine()
+        try self.sut.buildLine()
         
         XCTAssertEqual(self.sut.line, expectedLine)
     }
@@ -57,7 +57,7 @@ class M3UPlaylistLineDecoderTests: XCTestCase {
         resource.forEach {
             _ = self.sut.feed($0)
         }
-        self.sut.buildLine()
+        try self.sut.buildLine()
         
         XCTAssertEqual(self.sut.line, expectedLine)
     }
