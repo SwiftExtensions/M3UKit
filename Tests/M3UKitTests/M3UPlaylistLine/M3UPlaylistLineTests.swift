@@ -60,7 +60,7 @@ extension M3UPlaylistLineTests {
         let runtime: TimeInterval = 123
         let expectedLine = M3UPlaylistLine.extInf(runtime: runtime, title: "")
         self.sut = .extInf
-        try! self.sut.setRuntime(String(runtime))
+        try self.sut.setRuntime(String(runtime))
         
         XCTAssertEqual(self.sut, expectedLine)
     }
@@ -86,7 +86,7 @@ extension M3UPlaylistLineTests {
         let expectedLine = M3UPlaylistLine.extInf(runtime: runtime, title: title)
         
         self.sut = M3UPlaylistLine.extInf(runtime: runtime, title: "")
-        try! self.sut.complete(value: title)
+        try self.sut.complete(value: title)
         
         XCTAssertEqual(self.sut, expectedLine)
     }
@@ -96,7 +96,7 @@ extension M3UPlaylistLineTests {
         let expectedLine = M3UPlaylistLine.extGrp(group: group)
         
         self.sut = M3UPlaylistLine.extGrp
-        try! self.sut.complete(value: group)
+        try self.sut.complete(value: group)
         
         XCTAssertEqual(self.sut, expectedLine)
     }
@@ -107,7 +107,7 @@ extension M3UPlaylistLineTests {
         let expectedLine = M3UPlaylistLine.unknownTag(name: name, value: value)
         
         self.sut = M3UPlaylistLine.unknownTag(name: name, value: "")
-        try! self.sut.complete(value: value)
+        try self.sut.complete(value: value)
         
         XCTAssertEqual(self.sut, expectedLine)
     }

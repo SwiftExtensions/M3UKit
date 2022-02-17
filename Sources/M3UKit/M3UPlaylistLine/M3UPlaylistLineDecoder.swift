@@ -53,7 +53,7 @@ struct M3UPlaylistLineDecoder {
             self.collector = ""
         }
         if self.state.isEndOfLine {
-            self.buildLine()
+            try? self.buildLine()
         }
         
         return !self.state.isEndOfLine
@@ -62,11 +62,11 @@ struct M3UPlaylistLineDecoder {
     /**
      Builds extended M3U playlist line.
      */
-    mutating func buildLine() {
+    mutating func buildLine() throws {
         if self.line == nil {
             self.line = M3UPlaylistLine(line: self.collector)
         } else {
-            try? self.line?.complete(value: self.collector)
+            try self.line?.complete(value: self.collector)
         }
     }
     
