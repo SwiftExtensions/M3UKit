@@ -8,8 +8,8 @@
 import Foundation
 
 /**
- An extended M3U playlist line.
- More info see [M3U](https://en.wikipedia.org/wiki/M3U).
+ An extended
+ [M3U](https://en.wikipedia.org/wiki/M3U) playlist line.
  */
 public enum M3UPlaylistLine: Equatable {
     /**
