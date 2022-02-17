@@ -8,9 +8,9 @@
 import Foundation
 
 /**
- An extended M3U playlist line decoder.
- 
- More info see [M3U](https://en.wikipedia.org/wiki/M3U).
+ An extended
+ [M3U](https://en.wikipedia.org/wiki/M3U)
+ playlist line decoder.
  */
 struct M3UPlaylistLineDecoder {
     /**
@@ -18,23 +18,15 @@ struct M3UPlaylistLineDecoder {
      */
     private var collector = ""
     /**
-     An extended M3U playlist line decoder current state.
+     An extended
+     [M3U](https://en.wikipedia.org/wiki/M3U)
+     playlist line decoder current state.
      */
     private var state: M3UPlaylistLineDecoderState = StartSeeker()
-//    /**
-//     An extended M3U playlist tag of current line (_if available_).
-//
-//     More info see [M3U](https://en.wikipedia.org/wiki/M3U).
-//     */
-//    private var extTag: M3UExtTag?
-//    /**
-//     Runtime of track in seconds. Available only for `#EXTINF:` tag.
-//
-//     More info see [M3U](https://en.wikipedia.org/wiki/M3U).
-//     */
-//    private var runtime: TimeInterval?
     /**
-     An extended M3U playlist line.
+     An extended
+     [M3U](https://en.wikipedia.org/wiki/M3U)
+     playlist line.
      */
     private(set) var line: M3UPlaylistLine?
     
