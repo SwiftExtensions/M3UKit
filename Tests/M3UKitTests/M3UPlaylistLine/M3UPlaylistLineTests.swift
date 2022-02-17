@@ -15,6 +15,12 @@ class M3UPlaylistLineTests: XCTestCase {
         self.sut = nil
     }
 
+    
+}
+
+// MARK: - isExtInf tests
+
+extension M3UPlaylistLineTests {
     func test_isExtInf_notExtInf_returnsFalse() throws {
         self.sut = .extM3U
         XCTAssertFalse(self.sut.isExtInf)
@@ -35,6 +41,12 @@ class M3UPlaylistLineTests: XCTestCase {
         XCTAssertTrue(self.sut.isExtInf)
     }
     
+    
+}
+
+// MARK: - setRuntime tests
+
+extension M3UPlaylistLineTests {
     func test_setRuntime_invalidLine_throws() {
         self.sut = .extM3U
         let expectedError = M3UPlaylistLine.Error.runtimeNotFound(line: .extM3U)
@@ -49,6 +61,53 @@ class M3UPlaylistLineTests: XCTestCase {
         let expectedLine = M3UPlaylistLine.extInf(runtime: runtime, title: "")
         self.sut = .extInf
         try? self.sut.setRuntime(String(runtime))
+        
+        XCTAssertEqual(self.sut, expectedLine)
+    }
+    
+
+}
+
+// MARK: - complete tests
+
+extension M3UPlaylistLineTests {
+    func test_complete_invalidLine_throws() {
+        self.sut = .extM3U
+        let expectedError = M3UPlaylistLine.Error.invalidCompletionCall(line: .extM3U)
+        
+        XCTAssertThrowsError(try self.sut.complete(value: "Test")) { error in
+            XCTAssertEqual(error as? M3UPlaylistLine.Error, expectedError)
+        }
+    }
+    
+    func test_complete_extInf_setsValue() {
+        let runtime: TimeInterval = -1
+        let title = "Test"
+        let expectedLine = M3UPlaylistLine.extInf(runtime: runtime, title: title)
+        
+        self.sut = M3UPlaylistLine.extInf(runtime: runtime, title: "")
+        try? self.sut.complete(value: title)
+        
+        XCTAssertEqual(self.sut, expectedLine)
+    }
+    
+    func test_complete_extGrp_setsValue() {
+        let group = "Test"
+        let expectedLine = M3UPlaylistLine.extGrp(group: group)
+        
+        self.sut = M3UPlaylistLine.extGrp
+        try? self.sut.complete(value: group)
+        
+        XCTAssertEqual(self.sut, expectedLine)
+    }
+    
+    func test_complete_unknownTag_setsValue() {
+        let name = "Test Name"
+        let value = "Test Vame"
+        let expectedLine = M3UPlaylistLine.unknownTag(name: name, value: value)
+        
+        self.sut = M3UPlaylistLine.unknownTag(name: name, value: "")
+        try? self.sut.complete(value: value)
         
         XCTAssertEqual(self.sut, expectedLine)
     }
