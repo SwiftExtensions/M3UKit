@@ -9,7 +9,8 @@ import Foundation
 
 /**
  An extended
- [M3U](https://en.wikipedia.org/wiki/M3U) playlist line.
+ [M3U](https://en.wikipedia.org/wiki/M3U)
+ playlist line.
  */
 public enum M3UPlaylistLine: Equatable {
     /**
@@ -124,10 +125,12 @@ public enum M3UPlaylistLine: Equatable {
      - Parameters:
        - runtime: The track runtime in seconds (_string representation_).
      */
-    mutating func setRuntime(_ runtime: String) {
+    mutating func setRuntime(_ runtime: String) throws {
         if case .extInf(_, _) = self {
             let runtime = TimeInterval(runtime)
             self = .extInf(runtime: runtime, title: "")
+        } else {
+            throw Error.runtimeNotFound(line: self)
         }
     }
     /**

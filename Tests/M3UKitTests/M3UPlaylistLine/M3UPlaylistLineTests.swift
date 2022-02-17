@@ -35,13 +35,22 @@ class M3UPlaylistLineTests: XCTestCase {
         XCTAssertTrue(self.sut.isExtInf)
     }
     
+    func test_setRuntime_invalidLine_throws() {
+        self.sut = .extM3U
+        let expectedError = M3UPlaylistLine.Error.runtimeNotFound(line: .extM3U)
+        
+        XCTAssertThrowsError(try self.sut.setRuntime("-1")) { error in
+            XCTAssertEqual(error as? M3UPlaylistLine.Error, expectedError)
+        }
+    }
+    
     func test_setRuntime_setsRuntime() {
         let runtime: TimeInterval = 123
-        let epectedLine = M3UPlaylistLine.extInf(runtime: runtime, title: "")
+        let expectedLine = M3UPlaylistLine.extInf(runtime: runtime, title: "")
         self.sut = .extInf
-        self.sut.setRuntime(String(runtime))
+        try? self.sut.setRuntime(String(runtime))
         
-        XCTAssertEqual(self.sut, epectedLine)
+        XCTAssertEqual(self.sut, expectedLine)
     }
     
 

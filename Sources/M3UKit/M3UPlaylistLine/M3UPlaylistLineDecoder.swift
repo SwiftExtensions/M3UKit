@@ -49,7 +49,7 @@ struct M3UPlaylistLineDecoder {
             self.line = line
             self.collector = ""
         } else if self.state.isRuntime {
-            self.line?.setRuntime(self.collector)
+            try? self.line?.setRuntime(self.collector)
             self.collector = ""
         }
         if self.state.isEndOfLine {
