@@ -66,7 +66,7 @@ struct M3UPlaylistLineDecoder {
         if self.line == nil {
             self.line = M3UPlaylistLine(line: self.collector)
         } else {
-            self.line?.complete(value: self.collector)
+            try? self.line?.complete(value: self.collector)
         }
     }
     

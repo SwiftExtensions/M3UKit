@@ -141,14 +141,14 @@ public enum M3UPlaylistLine: Equatable {
      Actual for:
      - an ``extInf(runtime:title:)`` line;
      - an ``extGrp(group:)`` line;
-     - and an ``unknownTag(name:value:)`` line;
+     - and an ``unknownTag(name:value:)`` line.
      
      - Parameters:
        - value: A last (_final_) part of
      an extended [M3U](https://en.wikipedia.org/wiki/M3U)
      playlist line.
      */
-    mutating func complete(value: String) {
+    mutating func complete(value: String) throws {
         switch self {
         case let .extInf(runtime, _):
             self = .extInf(runtime: runtime, title: value)
@@ -157,7 +157,7 @@ public enum M3UPlaylistLine: Equatable {
         case let .unknownTag(name, _):
             self = .unknownTag(name: name, value: value)
         default:
-            break
+            throw Error.invalidCompletionCall(line: self)
         }
     }
     

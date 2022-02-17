@@ -31,6 +31,20 @@ public extension M3UPlaylistLine {
          playlist line.
          */
         case runtimeNotFound(line: M3UPlaylistLine)
+        /**
+         The current line is not support ``complete(value:)`` method.
+         
+         - Parameters:
+          - line: An extended
+         [M3U](https://en.wikipedia.org/wiki/M3U)
+         playlist line.
+         
+         Supported lines:
+         - an ``extInf(runtime:title:)`` line;
+         - an ``extGrp(group:)`` line;
+         - and an ``unknownTag(name:value:)`` line.
+         */
+        case invalidCompletionCall(line: M3UPlaylistLine)
         
         
     }
@@ -51,6 +65,11 @@ extension M3UPlaylistLine.Error: LocalizedError {
         switch self {
         case let .runtimeNotFound(line: line):
             let message = #"The line does not support "runtime" parameter"#
+            let comment = message + "."
+            let key = message + ": \(line)."
+            errorDescription = NSLocalizedString(key, comment: comment)
+        case let .invalidCompletionCall(line: line):
+            let message = #"The line does not support "complete(value:)" method"#
             let comment = message + "."
             let key = message + ": \(line)."
             errorDescription = NSLocalizedString(key, comment: comment)
