@@ -17,6 +17,7 @@ class M3UPlaylistLoaderTests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
+        self.sut = nil
         self.mockSession = nil
     }
 

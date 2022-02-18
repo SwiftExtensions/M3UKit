@@ -9,7 +9,9 @@ import Foundation
 
 class SafeDictionary<Key: Hashable, Value> {
     private var dictionary = [Key : Value]()
-    private let queue = DispatchQueue(label: "\(SafeDictionary.self)", attributes: .concurrent)
+    private let queue = DispatchQueue(
+        label: "\(SafeDictionary.self)",
+        attributes: .concurrent)
     
     subscript(key: Key) -> Value? {
         get {
