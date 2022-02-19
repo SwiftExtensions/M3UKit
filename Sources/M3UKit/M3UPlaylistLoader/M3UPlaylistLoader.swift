@@ -8,9 +8,15 @@
 import Foundation
 import Networker
 
-/// Loads extended M3U playlist.
-///
-/// Uses [HTTPURLRequest](https://github.com/SwiftExtensions/HTTPURLRequest) library for loading.
+/**
+ The loader of an extended
+ [M3U](https://en.wikipedia.org/wiki/M3U)
+ playlists.
+ 
+ Uses
+ [HTTPURLRequest](https://github.com/SwiftExtensions/HTTPURLRequest)
+ library for loading.
+ */
 public struct M3UPlaylistLoader {
     /// The raw extended M3U playlist request result.
     public typealias DataResult = Result<DataResponse, Swift.Error>
