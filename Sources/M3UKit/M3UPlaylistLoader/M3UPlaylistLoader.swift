@@ -40,7 +40,7 @@ public struct M3UPlaylistLoader {
     /**
      Loads an extended [M3U](https://en.wikipedia.org/wiki/M3U) playlist from network.
      - Parameters:
-        - path: URL path to extended M3U playlist.
+        - urlString: URL string to extended M3U playlist.
         - dispatchQueue: A dispatch queue for completion handlers.
      Method uses a system-provided URLSession delegate if `nil`.
         - completionHandler: The completion handler to call when the extended M3U playlist load request is complete.
@@ -58,7 +58,7 @@ public struct M3UPlaylistLoader {
      import M3UKit
 
      let playlistLoader = M3UPlaylistLoader()
-     playlistLoader.load(path: URL_TO_PLAYLIST) { response in
+     playlistLoader.load(with: URL_TO_PLAYLIST) { response in
          switch response {
          case let .success(playlist):
              print(playlist.items)
@@ -70,13 +70,13 @@ public struct M3UPlaylistLoader {
      */
     @discardableResult
     public func load(
-        path: String,
+        with urlString: String,
         dispatchQueue: DispatchQueue? = nil,
         completionHandler: @escaping Completion) -> URLSessionDataTask?
     {
         let dataTask: URLSessionDataTask?
         do {
-            dataTask = try self.load(path, dispatchQueue, completionHandler)
+            dataTask = try self.load(with: urlString, dispatchQueue, completionHandler)
         } catch {
             completionHandler(.failure(error))
             dataTask = nil
@@ -84,20 +84,20 @@ public struct M3UPlaylistLoader {
         
         return dataTask
     }
-    
-    /// Core path loader of extended M3U playlist.
-    /// - Parameters:
-    ///   - path: URL path to extended M3U playlist.
-    ///   - dispatchQueue: A dispatch queue for completion handlers. Method uses a system-provided URLSession delegate if `nil`.
-    ///   - completion: The completion handler to call when the extended M3U playlist load request is complete.
-    ///   This handler is executed on the delegate queue.
-    /// - Returns: A URL session task that returns downloaded extended M3U playlist.
+    /**
+     Core path loader of extended M3U playlist.
+     - Parameter urlString: URL string to extended M3U playlist.
+     - Parameter dispatchQueue: A dispatch queue for completion handlers. Method uses a system-provided URLSession delegate if `nil`.
+     - Parameter completion: The completion handler to call when the extended M3U playlist load request is complete.
+     This handler is executed on the delegate queue.
+     - Returns: A URL session task that returns downloaded extended M3U playlist.
+     */
     private func load(
-        _ path: String,
+        with urlString: String,
         _ dispatchQueue: DispatchQueue?,
         _ completion: @escaping Completion) throws -> URLSessionDataTask
     {
-        let request = try HTTPURLRequest(path: path, session: self.session)
+        let request = try HTTPURLRequest(path: urlString, session: self.session)
         return self.load(request, dispatchQueue, completion)
     }
     

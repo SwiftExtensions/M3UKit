@@ -30,11 +30,11 @@ extension M3UPlaylistLoaderTests {
     func test_loadPathError_callsFailture() throws {
         let expectedError = NSError.urlRequestTimedOut
         let result = MockURLSession.Result(data: nil, response: nil, error: expectedError)
-        let path = "https://example.com/" + #function.description
-        MockURLSession.results[path] = result
+        let urlString = "https://example.com/" + #function.description
+        MockURLSession.results[urlString] = result
         
         self.sut = M3UPlaylistLoader(session: self.mockSession)
-        let dataTask = self.sut.load(path: path) { response in
+        let dataTask = self.sut.load(with: urlString) { response in
             XCTAssertNil(response.success)
             XCTAssertNotNil(response.failure)
             
@@ -43,30 +43,30 @@ extension M3UPlaylistLoaderTests {
             XCTAssertEqual(actualError?.domain, expectedError.domain)
             XCTAssertEqual(actualError?.code, expectedError.code)
             
-            MockURLSession.results[path] = nil
+            MockURLSession.results[urlString] = nil
         }
         XCTAssertNotNil(dataTask)
-        XCTAssertEqual(dataTask?.originalRequest?.url?.absoluteString, path)
+        XCTAssertEqual(dataTask?.originalRequest?.url?.absoluteString, urlString)
     }
     
     func test_loadPath_callsSuccess() throws {
         let data = String.M3UPlaylist.demo.utf8EncodingData
         let response = HTTPURLResponse.ok200
         let result = MockURLSession.Result(data: data, response: response, error: nil)
-        let path = "https://example.com/" + #function.description
-        MockURLSession.results[path] = result
+        let urlString = "https://example.com/" + #function.description
+        MockURLSession.results[urlString] = result
 
         self.sut = M3UPlaylistLoader(session: self.mockSession)
-        let dataTask = self.sut.load(path: path) { response in
+        let dataTask = self.sut.load(with: urlString) { response in
             XCTAssertNotNil(response.success)
             XCTAssertNil(response.failure)
             XCTAssertEqual(response.success?.lines, M3UDemoPlaylist.linesExample)
             XCTAssertEqual(response.success?.items, M3UDemoPlaylist.itemsExample)
             
-            MockURLSession.results[path] = nil
+            MockURLSession.results[urlString] = nil
         }
         XCTAssertNotNil(dataTask)
-        XCTAssertEqual(dataTask?.originalRequest?.url?.absoluteString, path)
+        XCTAssertEqual(dataTask?.originalRequest?.url?.absoluteString, urlString)
     }
 
     @available(iOS 10.0, *)
@@ -74,23 +74,23 @@ extension M3UPlaylistLoaderTests {
         let data = String.M3UPlaylist.demo.utf8EncodingData
         let response = HTTPURLResponse.ok200
         let result = MockURLSession.Result(data: data, response: response, error: nil)
-        let path = "https://example.com/" + #function.description
-        MockURLSession.results[path] = result
+        let urlString = "https://example.com/" + #function.description
+        MockURLSession.results[urlString] = result
 
         let targetQueue = DispatchQueue(label: #function)
 
         self.sut = M3UPlaylistLoader(session: self.mockSession)
-        let dataTask = self.sut.load(path: path, dispatchQueue: targetQueue) { response in
+        let dataTask = self.sut.load(with: urlString, dispatchQueue: targetQueue) { response in
             dispatchPrecondition(condition: .onQueue(targetQueue))
             DispatchQueue.main.async {
                 XCTAssertNotNil(response.success)
                 XCTAssertNotNil(response.failure)
                 
-                MockURLSession.results[path] = nil
+                MockURLSession.results[urlString] = nil
             }
         }
         XCTAssertNotNil(dataTask)
-        XCTAssertEqual(dataTask?.originalRequest?.url?.absoluteString, path)
+        XCTAssertEqual(dataTask?.originalRequest?.url?.absoluteString, urlString)
     }
     
 
