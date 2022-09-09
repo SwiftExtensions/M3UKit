@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = 'M3UKit'
-  spec.version      = '0.0.1'
+  spec.version      = '0.0.2'
   spec.summary      = 'The extended M3U playlist parser.'
 
   # This description is used to generate tags and improve search results.
