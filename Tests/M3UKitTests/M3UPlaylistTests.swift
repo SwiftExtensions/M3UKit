@@ -15,18 +15,24 @@ class M3UPlaylistTests: XCTestCase {
         self.sut = nil
     }
 
-    func test_initLines_createsCorrectItems() throws {
-        self.sut = M3UPlaylist(lines: M3UDemoPlaylist.linesExample)
+    func test_initLines_invalidLines_throws() throws {
+        let expectedError = M3UParser.Error.invalidM3UPlaylist
+        var actualError: Error? = nil
+        do {
+            _ = try M3UPlaylist(lines: M3UDemoPlaylist.invalidLinesExample)
+        } catch {
+            actualError = error
+        }
+        
+        XCTAssertNotNil(actualError)
+        XCTAssertEqual(expectedError, actualError as? M3UParser.Error)
+    }
+    
+    func test_initLines_validLines_createsCorrectItems() throws {
+        self.sut = try M3UPlaylist(lines: M3UDemoPlaylist.linesExample)
         
         XCTAssertEqual(self.sut.lines, M3UDemoPlaylist.linesExample)
         XCTAssertEqual(self.sut.items, M3UDemoPlaylist.itemsExample)
-    }
-    
-    func test_init_createsCorrectValues() throws {
-        self.sut = M3UPlaylist()
-        
-        XCTAssertTrue(self.sut.lines.isEmpty)
-        XCTAssertTrue(self.sut.items.isEmpty)
     }
     
 

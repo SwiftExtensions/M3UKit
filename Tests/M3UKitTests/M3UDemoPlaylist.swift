@@ -9,6 +9,12 @@ import Foundation
 @testable import M3UKit
 
 struct M3UDemoPlaylist {
+    static let invalidLinesExample: [M3UPlaylistLine] = [
+        .resource(path: "INVALID LINE"),
+        .resource(path: "INVALID LINE"),
+        .resource(path: "INVALID LINE"),
+        .resource(path: "INVALID LINE")
+    ]
     static let linesExample: [M3UPlaylistLine] = [
         .extM3U,
         .extInf(runtime: -1, title: "=== Обновлён: 30.12.2021 === smarttvnews.ru ==="),

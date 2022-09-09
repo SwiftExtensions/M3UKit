@@ -9,19 +9,23 @@ import Foundation
 import Networker
 
 extension M3ULoader {
-    /// The extended M3U playlist response handler.
+    /**
+     The extended M3U playlist response handler.
+     */
     struct ResponseHandler {
-        /// Handles the extended M3U playlist response and returns result.
-        /// - Parameter response: The raw extended M3U playlist request result.
-        /// - Returns: The extended M3U playlist response handler result.
+        /**
+         Handles the extended M3U playlist response and returns result.
+         - Parameter response: The raw extended M3U playlist request result.
+         - Returns: The extended M3U playlist response handler result.
+         */
         func handle(_ response: DataResult) -> PlaylistResult {
             let result: PlaylistResult
-            switch response {
-            case let .success(response):
+            do {
+                let response = try response.get()
                 let parser = M3UParser()
-                let playlist = parser.parse(data: response.data)
+                let playlist = try parser.parse(data: response.data)
                 result = .success(playlist)
-            case let .failure(error):
+            } catch {
                 result = .failure(error)
             }
             

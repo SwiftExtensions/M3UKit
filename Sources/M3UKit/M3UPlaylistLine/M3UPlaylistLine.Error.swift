@@ -52,7 +52,7 @@ public extension M3UPlaylistLine {
     
 }
 
-// MARK: - LocalizedError
+// MARK: LocalizedError
 
 extension M3UPlaylistLine.Error: LocalizedError {
     /**

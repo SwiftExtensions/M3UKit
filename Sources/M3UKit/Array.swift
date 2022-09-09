@@ -14,7 +14,7 @@ public extension Array where Element == M3UPlaylistLine {
      */
     func buildItems() -> [M3UPlaylistItem] {
         var runtime: TimeInterval?
-        var title = ""
+        var title: String?
         var group: String?
         var items = [M3UPlaylistItem]()
         self.forEach { line in
@@ -27,15 +27,19 @@ public extension Array where Element == M3UPlaylistLine {
             case let .extGrp(groupTitle):
                 group = groupTitle
             case let .resource(string):
+                guard let trackTitle = title else {
+                    return
+                }
+                
                 let resource = M3UPlaylistItem.Resource(string: string)
                 let item = M3UPlaylistItem(
                     runtime: runtime,
-                    title: title,
+                    title: trackTitle,
                     group: group,
                     resource: resource)
                 items.append(item)
                 runtime = nil
-                title = ""
+                title = nil
             case .unknownTag(name: _, value: _):
                 break
             }

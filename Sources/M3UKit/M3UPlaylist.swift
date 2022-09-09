@@ -33,19 +33,14 @@ public struct M3UPlaylist: Equatable {
      [M3U](https://en.wikipedia.org/wiki/M3U)
      playlist.
      */
-    public init(lines: [M3UPlaylistLine]) {
+    public init(lines: [M3UPlaylistLine]) throws {
+        let items = lines.buildItems()
+        if !lines.isEmpty && items.isEmpty {
+            throw M3UParser.Error.invalidM3UPlaylist
+        }
+            
         self.lines = lines
-        self.items = lines.buildItems()
-    }
-    
-    /**
-     Creates instanse of an empty extended
-     [M3U](https://en.wikipedia.org/wiki/M3U)
-     playlist.
-     */
-    public init() {
-        self.lines = []
-        self.items = []
+        self.items = items
     }
     
     
