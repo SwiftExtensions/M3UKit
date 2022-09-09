@@ -1,5 +1,5 @@
 //
-//  RuntimeStartSeekerTests.swift
+//  RuntimeStateTests.swift
 //
 //
 //  Created by Александр Алгашев on 06.02.2022.
@@ -8,11 +8,11 @@
 import XCTest
 @testable import M3UKit
 
-class RuntimeStartSeekerTests: XCTestCase {
-    var sut: M3UPlaylistLineDecoder.RuntimeStartSeeker!
+class RuntimeStateTests: XCTestCase {
+    var sut: M3ULineParser.RuntimeState!
 
     override func setUpWithError() throws {
-        self.sut = M3UPlaylistLineDecoder.RuntimeStartSeeker()
+        self.sut = M3ULineParser.RuntimeState()
     }
 
     override func tearDownWithError() throws {
@@ -20,7 +20,7 @@ class RuntimeStartSeekerTests: XCTestCase {
     }
 
     func test_init_setsCorrectValues() throws {
-        XCTAssertFalse(self.sut.isAppendable)
+        XCTAssertTrue(self.sut.isAppendable)
         XCTAssertFalse(self.sut.isExtTag)
         XCTAssertFalse(self.sut.isRuntime)
         XCTAssertFalse(self.sut.isEndOfLine)
@@ -28,33 +28,37 @@ class RuntimeStartSeekerTests: XCTestCase {
     
     func test_feed_number_returnsCorrectState() {
         let state = self.sut.feed("1")
-        XCTAssertNotNil(state as? M3UPlaylistLineDecoder.RuntimeState)
+        XCTAssertNotNil(state as? M3ULineParser.RuntimeState)
         XCTAssertTrue(state.isAppendable)
         XCTAssertFalse(state.isExtTag)
         XCTAssertFalse(state.isRuntime)
         XCTAssertFalse(state.isEndOfLine)
     }
     
-    func test_feed_minus_returnsCorrectState() {
-        let state = self.sut.feed("-")
-        XCTAssertNotNil(state as? M3UPlaylistLineDecoder.RuntimeState)
-        XCTAssertTrue(state.isAppendable)
+    func test_feed_comma_returnsCorrectState() {
+        let state = self.sut.feed(",")
+        XCTAssertNotNil(state as? M3ULineParser.EndOfLineSeeker)
+        XCTAssertFalse(state.isAppendable)
         XCTAssertFalse(state.isExtTag)
-        XCTAssertFalse(state.isRuntime)
+        XCTAssertTrue(state.isRuntime)
         XCTAssertFalse(state.isEndOfLine)
     }
     
     func test_feed_space_returnsCorrectState() {
         let state = self.sut.feed(" ")
-        XCTAssertNotNil(state as? M3UPlaylistLineDecoder.RuntimeStartSeeker)
+        XCTAssertNotNil(state as? M3ULineParser.EndOfLineSeeker)
+        XCTAssertFalse(state.isAppendable)
+        XCTAssertFalse(state.isExtTag)
+        XCTAssertTrue(state.isRuntime)
+        XCTAssertFalse(state.isEndOfLine)
     }
 
     func test_feed_character_returnsCorrectState() {
         let state = self.sut.feed("h")
-        XCTAssertNotNil(state as? M3UPlaylistLineDecoder.EndOfLineSeeker)
+        XCTAssertNotNil(state as? M3ULineParser.EndOfLineSeeker)
         XCTAssertTrue(state.isAppendable)
         XCTAssertFalse(state.isExtTag)
-        XCTAssertFalse(state.isRuntime)
+        XCTAssertTrue(state.isRuntime)
         XCTAssertFalse(state.isEndOfLine)
     }
 

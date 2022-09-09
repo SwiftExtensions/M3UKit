@@ -1,14 +1,14 @@
 //
-//  M3UPlaylistLineDecoderState.swift
+//  M3ULineParserState.swift
 //  M3UKit
 //
 //  Created by Александр Алгашев on 23.01.2022.
 //
 
 /**
- A type that can be used to determine ``M3UPlaylistLineDecoder`` current state.
+ A type that can be used to determine ``M3ULineParser`` current state.
  */
-protocol M3UPlaylistLineDecoderState {
+protocol M3ULineParserState {
     /**
      A valid character to collect.
      */
@@ -31,12 +31,12 @@ protocol M3UPlaylistLineDecoderState {
     var isEndOfLine: Bool { get }
     
     /**
-     Analyzes the character and determine the current state of the ``M3UPlaylistLineDecoder``.
+     Analyzes the character and determine the current state of the ``M3ULineParser``.
      - Parameters:
      - char: The character to analyze.
      - Returns: The current state of the ``M3ULineParser`` parser.
      */
-    func feed(_ char: Character) -> M3UPlaylistLineDecoderState
+    func feed(_ char: Character) -> M3ULineParserState
 
 
 }

@@ -1,5 +1,5 @@
 //
-//  M3UPlaylistLineDecoder.swift
+//  M3ULineParser.swift
 //  M3UKit
 //
 //  Created by Александр Алгашев on 23.01.2022.
@@ -12,7 +12,7 @@ import Foundation
  [M3U](https://en.wikipedia.org/wiki/M3U)
  playlist line decoder.
  */
-struct M3UPlaylistLineDecoder {
+struct M3ULineParser {
     /**
      A collected string of valid characters.
      */
@@ -22,7 +22,7 @@ struct M3UPlaylistLineDecoder {
      [M3U](https://en.wikipedia.org/wiki/M3U)
      playlist line decoder current state.
      */
-    private var state: M3UPlaylistLineDecoderState = StartSeeker()
+    private var state: M3ULineParserState = StartSeeker()
     /**
      An extended
      [M3U](https://en.wikipedia.org/wiki/M3U)

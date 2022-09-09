@@ -19,14 +19,14 @@ public struct M3UParser {
      - Parameter string: String representation of extended M3U playlist.
      */
     public func parse(string: String) -> M3UPlaylist {
-        var lineParser = M3UPlaylistLineDecoder()
+        var lineParser = M3ULineParser()
         var lines = [M3UPlaylistLine]()
         string.appending("\n").forEach {
             if lineParser.feed($0) {
                 return
             } else if let line = lineParser.line {
                 lines.append(line)
-                lineParser = M3UPlaylistLineDecoder()
+                lineParser = M3ULineParser()
             }
         }
         
