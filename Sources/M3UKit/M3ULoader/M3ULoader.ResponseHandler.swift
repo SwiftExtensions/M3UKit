@@ -19,7 +19,7 @@ extension M3ULoader {
             switch response {
             case let .success(response):
                 let parser = M3UParser()
-                let playlist = parser.decode(data: response.data)
+                let playlist = parser.parse(data: response.data)
                 result = .success(playlist)
             case let .failure(error):
                 result = .failure(error)

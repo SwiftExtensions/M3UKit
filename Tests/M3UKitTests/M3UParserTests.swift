@@ -20,21 +20,21 @@ class M3UParserTests: XCTestCase {
     }
 
     func test_parsePlaylist_createsCorrectValues() throws {
-        let playlist = self.sut.decode(string: .M3UPlaylist.demo)
+        let playlist = self.sut.parse(string: .M3UPlaylist.demo)
         
         XCTAssertEqual(playlist.lines, M3UDemoPlaylist.linesExample)
         XCTAssertEqual(playlist.items, M3UDemoPlaylist.itemsExample)
     }
     
     func test_parsePlaylist_invalidTag_createsCorrectValues() throws {
-        let playlist = self.sut.decode(string: .M3UPlaylist.demoWithInvalidTag)
+        let playlist = self.sut.parse(string: .M3UPlaylist.demoWithInvalidTag)
         
         XCTAssertEqual(playlist.lines, M3UDemoPlaylist.linesInvalidTagExample)
         XCTAssertEqual(playlist.items, M3UDemoPlaylist.itemsExample)
     }
     
     func test_parseData_createsCorrectValues() throws {
-        let playlist = self.sut.decode(data: String.M3UPlaylist.demo.utf8EncodingData)
+        let playlist = self.sut.parse(data: String.M3UPlaylist.demo.utf8EncodingData)
         
         XCTAssertEqual(playlist.lines, M3UDemoPlaylist.linesExample)
         XCTAssertEqual(playlist.items, M3UDemoPlaylist.itemsExample)
@@ -43,7 +43,7 @@ class M3UParserTests: XCTestCase {
 //    func test_performance_parseChars() throws {
 //        // This is an example of a performance test case.
 //        self.measure {
-//            _ = self.sut.decode(string: String.M3UPlaylist.freeiptv)
+//            _ = self.sut.parse(string: String.M3UPlaylist.freeiptv)
 //        }
 //    }
 //
