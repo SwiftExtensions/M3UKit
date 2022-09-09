@@ -1,5 +1,5 @@
 //
-//  M3UPlaylistLoader.swift
+//  M3ULoader.swift
 //  M3UKit
 //
 //  Created by Александр Алгашев on 23.01.2022.
@@ -17,7 +17,7 @@ import Networker
  [HTTPURLRequest](https://github.com/SwiftExtensions/HTTPURLRequest)
  library for loading.
  */
-public struct M3UPlaylistLoader {
+public struct M3ULoader {
     /// The raw extended M3U playlist request result.
     public typealias DataResult = Result<DataResponse, Swift.Error>
     /// The extended M3U playlist request result.
@@ -57,8 +57,8 @@ public struct M3UPlaylistLoader {
      ```swift
      import M3UKit
 
-     let playlistLoader = M3UPlaylistLoader()
-     playlistLoader.load(with: URL_TO_PLAYLIST) { response in
+     let m3uLoader = M3ULoader()
+     m3uLoader.load(with: URL_TO_PLAYLIST) { response in
          switch response {
          case let .success(playlist):
              print(playlist.items)
@@ -144,9 +144,9 @@ public struct M3UPlaylistLoader {
      ```swift
      import M3UKit
 
-     let playlistLoader = M3UPlaylistLoader()
+     let m3uLoader = M3ULoader()
      let url = URL(string: PATH_TO_PLAYLIST)!
-     playlistLoader.load(url: url) { response in
+     m3uLoader.load(url: url) { response in
          switch response {
          case let .success(playlist):
              print(playlist.items)
@@ -188,10 +188,10 @@ public struct M3UPlaylistLoader {
      ```swift
      import M3UKit
 
-     let playlistLoader = M3UPlaylistLoader()
+     let m3uLoader = M3ULoader()
      let url = URL(string: PATH_TO_PLAYLIST)!
      let request = URLRequest(url: url)
-     playlistLoader.load(request: request) { response in
+     m3uLoader.load(request: request) { response in
          switch response {
          case let .success(playlist):
              print(playlist.items)

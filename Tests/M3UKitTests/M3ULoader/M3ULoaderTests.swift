@@ -1,5 +1,5 @@
 //
-//  M3UPlaylistLoaderTests.swift
+//  M3ULoaderTests.swift
 //  
 //
 //  Created by Александр Алгашев on 30.01.2022.
@@ -8,8 +8,8 @@
 import XCTest
 @testable import M3UKit
 
-class M3UPlaylistLoaderTests: XCTestCase {
-    var sut: M3UPlaylistLoader!
+class M3ULoaderTests: XCTestCase {
+    var sut: M3ULoader!
     var mockSession: URLSession!
     
     override func setUpWithError() throws {
@@ -26,14 +26,14 @@ class M3UPlaylistLoaderTests: XCTestCase {
 
 // MARK: - Path tests
 
-extension M3UPlaylistLoaderTests {
+extension M3ULoaderTests {
     func test_loadPathError_callsFailture() throws {
         let expectedError = NSError.urlRequestTimedOut
         let result = MockURLSession.Result(data: nil, response: nil, error: expectedError)
         let urlString = "https://example.com/" + #function.description
         MockURLSession.results[urlString] = result
         
-        self.sut = M3UPlaylistLoader(session: self.mockSession)
+        self.sut = M3ULoader(session: self.mockSession)
         let dataTask = self.sut.load(with: urlString) { response in
             XCTAssertNil(response.success)
             XCTAssertNotNil(response.failure)
@@ -56,7 +56,7 @@ extension M3UPlaylistLoaderTests {
         let urlString = "https://example.com/" + #function.description
         MockURLSession.results[urlString] = result
 
-        self.sut = M3UPlaylistLoader(session: self.mockSession)
+        self.sut = M3ULoader(session: self.mockSession)
         let dataTask = self.sut.load(with: urlString) { response in
             XCTAssertNotNil(response.success)
             XCTAssertNil(response.failure)
@@ -79,7 +79,7 @@ extension M3UPlaylistLoaderTests {
 
         let targetQueue = DispatchQueue(label: #function)
 
-        self.sut = M3UPlaylistLoader(session: self.mockSession)
+        self.sut = M3ULoader(session: self.mockSession)
         let dataTask = self.sut.load(with: urlString, dispatchQueue: targetQueue) { response in
             dispatchPrecondition(condition: .onQueue(targetQueue))
             DispatchQueue.main.async {
@@ -98,7 +98,7 @@ extension M3UPlaylistLoaderTests {
 
 // MARK: - URL tests
 
-extension M3UPlaylistLoaderTests {
+extension M3ULoaderTests {
     func test_loadURLError_callsFailture() throws {
         let expectedError = NSError.urlRequestTimedOut
         let result = MockURLSession.Result(data: nil, response: nil, error: expectedError)
@@ -106,7 +106,7 @@ extension M3UPlaylistLoaderTests {
         MockURLSession.results[path] = result
         let url = URL(string: path)!
         
-        self.sut = M3UPlaylistLoader(session: self.mockSession)
+        self.sut = M3ULoader(session: self.mockSession)
         let dataTask = self.sut.load(url: url) { response in
             XCTAssertNil(response.success)
             XCTAssertNotNil(response.failure)
@@ -130,7 +130,7 @@ extension M3UPlaylistLoaderTests {
         MockURLSession.results[path] = result
         let url = URL(string: path)!
 
-        self.sut = M3UPlaylistLoader(session: self.mockSession)
+        self.sut = M3ULoader(session: self.mockSession)
         let dataTask = self.sut.load(url: url) { response in
             XCTAssertNotNil(response.success)
             XCTAssertNil(response.failure)
@@ -154,7 +154,7 @@ extension M3UPlaylistLoaderTests {
 
         let targetQueue = DispatchQueue(label: #function)
 
-        self.sut = M3UPlaylistLoader(session: self.mockSession)
+        self.sut = M3ULoader(session: self.mockSession)
         let dataTask = self.sut.load(url: url, dispatchQueue: targetQueue) { response in
             dispatchPrecondition(condition: .onQueue(targetQueue))
             DispatchQueue.main.async {
@@ -173,7 +173,7 @@ extension M3UPlaylistLoaderTests {
 
 // MARK: - Request tests
 
-extension M3UPlaylistLoaderTests {
+extension M3ULoaderTests {
     func test_loadRequestError_callsFailture() throws {
         let expectedError = NSError.urlRequestTimedOut
         let result = MockURLSession.Result(data: nil, response: nil, error: expectedError)
@@ -182,7 +182,7 @@ extension M3UPlaylistLoaderTests {
         let url = URL(string: path)!
         let request = URLRequest(url: url)
 
-        self.sut = M3UPlaylistLoader(session: self.mockSession)
+        self.sut = M3ULoader(session: self.mockSession)
         let dataTask = self.sut.load(request: request) { response in
             XCTAssertNil(response.success)
             XCTAssertNotNil(response.failure)
@@ -207,7 +207,7 @@ extension M3UPlaylistLoaderTests {
         let url = URL(string: path)!
         let request = URLRequest(url: url)
 
-        self.sut = M3UPlaylistLoader(session: self.mockSession)
+        self.sut = M3ULoader(session: self.mockSession)
         let dataTask = self.sut.load(request: request) { response in
             XCTAssertNotNil(response.success)
             XCTAssertNil(response.failure)
@@ -232,7 +232,7 @@ extension M3UPlaylistLoaderTests {
 
         let targetQueue = DispatchQueue(label: #function)
 
-        self.sut = M3UPlaylistLoader(session: self.mockSession)
+        self.sut = M3ULoader(session: self.mockSession)
         let dataTask = self.sut.load(request: request, dispatchQueue: targetQueue) { response in
             dispatchPrecondition(condition: .onQueue(targetQueue))
             DispatchQueue.main.async {

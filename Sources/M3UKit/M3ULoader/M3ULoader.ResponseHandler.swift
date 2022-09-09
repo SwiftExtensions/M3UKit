@@ -1,5 +1,5 @@
 //
-//  M3UPlaylistLoader.ResponseHandler.swift
+//  M3ULoader.ResponseHandler.swift
 //  M3UKit
 //
 //  Created by Александр Алгашев on 23.01.2022.
@@ -8,7 +8,7 @@
 import Foundation
 import Networker
 
-extension M3UPlaylistLoader {
+extension M3ULoader {
     /// The extended M3U playlist response handler.
     struct ResponseHandler {
         /// Handles the extended M3U playlist response and returns result.

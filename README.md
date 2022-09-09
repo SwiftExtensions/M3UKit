@@ -39,8 +39,8 @@ For more information, see [`Adding Package Dependencies to Your App`](https://de
 ```swift
 import M3UKit
 
-let decoder = M3UPlaylistDecoder()
-let playlist = decoder.decode(string: PLAYLIST)
+let parser = M3UParser()
+let playlist = parser.decode(string: PLAYLIST)
 ```
 [Go to content](#content)
 
@@ -49,8 +49,8 @@ let playlist = decoder.decode(string: PLAYLIST)
 ```swift
 import M3UKit
 
-let playlistLoader = M3UPlaylistLoader()
-playlistLoader.load(path: URL_TO_PLAYLIST) { response in
+let m3uLoader = M3ULoader()
+m3uLoader.load(with: URL_TO_PLAYLIST) { response in
     switch response {
     case let .success(playlist):
         print(playlist.items)

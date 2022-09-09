@@ -1,5 +1,5 @@
 //
-//  M3UPlaylistLoaderResponseHandlerTests.swift
+//  M3ULoaderResponseHandlerTests.swift
 //  
 //
 //  Created by Александр Алгашев on 30.01.2022.
@@ -9,8 +9,8 @@ import XCTest
 import Networker
 @testable import M3UKit
 
-class M3UPlaylistLoaderResponseHandlerTests: XCTestCase {
-    typealias ResponseHandler = M3UPlaylistLoader.ResponseHandler
+class M3ULoaderResponseHandlerTests: XCTestCase {
+    typealias ResponseHandler = M3ULoader.ResponseHandler
     
     var sut: ResponseHandler!
 
