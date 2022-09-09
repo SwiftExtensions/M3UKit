@@ -1,5 +1,5 @@
 //
-//  M3UPlaylistDecoder.swift
+//  M3UParser.swift
 //  M3UKit
 //
 //  Created by Александр Алгашев on 23.01.2022.
@@ -13,7 +13,7 @@ import Networker
  
  More info see [M3U](https://en.wikipedia.org/wiki/M3U).
  */
-public struct M3UPlaylistDecoder {
+public struct M3UParser {
     /**
      Splits extended M3U playlist into lines and convert to items.
      - Parameter string: String representation of extended M3U playlist.
