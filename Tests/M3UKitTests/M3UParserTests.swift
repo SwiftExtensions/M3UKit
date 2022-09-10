@@ -46,7 +46,7 @@ class M3UParserTests: XCTestCase {
     }
     
     func test_parseString_invalidM3UString_throws() throws {
-        let expectedError = M3UParser.Error.invalidM3UPlaylist
+        let expectedError = M3UParser.Error.m3uPlaylistIsNotRecognized
         var actualError: Error? = nil
         do {
             _ = try self.sut.parse(string: "INVALID M3U")

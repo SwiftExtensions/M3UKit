@@ -36,7 +36,7 @@ public struct M3UPlaylist: Equatable {
     public init(lines: [M3UPlaylistLine]) throws {
         let items = lines.buildItems()
         if !lines.isEmpty && items.isEmpty {
-            throw M3UParser.Error.invalidM3UPlaylist
+            throw M3UParser.Error.m3uPlaylistIsNotRecognized
         }
             
         self.lines = lines

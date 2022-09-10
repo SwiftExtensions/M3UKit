@@ -16,7 +16,7 @@ class M3UPlaylistTests: XCTestCase {
     }
 
     func test_initLines_invalidLines_throws() throws {
-        let expectedError = M3UParser.Error.invalidM3UPlaylist
+        let expectedError = M3UParser.Error.m3uPlaylistIsNotRecognized
         var actualError: Error? = nil
         do {
             _ = try M3UPlaylist(lines: M3UDemoPlaylist.invalidLinesExample)
