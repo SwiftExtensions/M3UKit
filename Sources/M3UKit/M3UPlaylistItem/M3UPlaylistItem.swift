@@ -54,3 +54,29 @@ public struct M3UPlaylistItem: Equatable {
     
     
 }
+
+// MARK: CustomDebugStringConvertible
+
+extension M3UPlaylistItem: CustomDebugStringConvertible {
+    /**
+     A textual representation of ``M3UPlaylistItem``, suitable for debugging.
+     */
+    public var debugDescription: String {
+        let runtime: String
+        if let value = self.runtime {
+            runtime = String(reflecting: value)
+        } else {
+            runtime = "nil"
+        }
+        let group: String
+        if let value = self.group {
+            group = String(reflecting: value)
+        } else {
+            group = "nil"
+        }
+        
+        return "M3UPlaylistItem(runtime: \(runtime), title: \(self.title), group: \(group), resource: \(self.resource))"
+    }
+    
+    
+}
