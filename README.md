@@ -6,21 +6,12 @@
 
 ## Content
 - [Installation](#installation)
-    - [CocoaPods](#cocoapods)
     - [Swift Package Manager](#swift-package-manager)
+    - [CocoaPods](#cocoapods)
 - [Parsing](#parsing)
 - [Loading from newtwork](#loading-from-newtwork)
 
 ## Installation
-
-### CocoaPods
-[`CocoaPods`](https://cocoapods.org/) is a dependency manager for `Swift` and `Objective-C` Cocoa projects. To integrate `M3UKit` into your `Xcode` project using `CocoaPods`, specify it in your `Podfile`:
-```ruby
-pod 'M3UKit', git: 'https://github.com/SwiftExtensions/M3UKit.git'
-pod 'Networker', git: 'https://github.com/SwiftExtensions/HTTPURLRequest.git'
-```
-
-[Go to content](#content)
 
 ### Swift Package Manager
 
@@ -31,6 +22,14 @@ https://github.com/SwiftExtensions/M3UKit.git
 You can also navigate to your target’s General pane, and in the `Frameworks, Libraries, and Embedded Content` section, click the `+` button, select `Add Other`, and choose `Add Package Dependency`.
 
 For more information, see [`Adding Package Dependencies to Your App`](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app).
+
+[Go to content](#content)
+
+### CocoaPods
+[`CocoaPods`](https://cocoapods.org/) is a dependency manager for `Swift` and `Objective-C` Cocoa projects. To integrate `M3UKit` into your `Xcode` project using `CocoaPods`, specify it in your `Podfile`:
+```ruby
+pod 'M3UKit', git: 'https://github.com/SwiftExtensions/M3UKit.git'
+```
 
 [Go to content](#content)
 
@@ -49,11 +48,11 @@ let playlist = parser.parse(string: PLAYLIST)
 ```swift
 import M3UKit
 
-let m3uLoader = M3ULoader()
-m3uLoader.load(with: URL_TO_PLAYLIST) { response in
+let loader = M3ULoader()
+try? loader.load(with: URL_TO_PLAYLIST) { response in
     switch response {
     case let .success(playlist):
-        print(playlist.items)
+        print(playlist)
     case let .failure(error):
         print(error)
     }

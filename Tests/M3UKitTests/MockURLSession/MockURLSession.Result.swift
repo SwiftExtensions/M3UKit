@@ -1,6 +1,6 @@
 //
 //  MockURLSession.Result.swift
-//  
+//  M3UKitTests
 //
 //  Created by Александр Алгашев on 07.02.2022.
 //

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MockURLSession: URLProtocol {
+final class MockURLSession: URLProtocol {
     static var results = SafeDictionary<String, Result>()
     
     override class func canInit(with request: URLRequest) -> Bool {

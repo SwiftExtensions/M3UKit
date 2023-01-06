@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Networker
 
 /**
  An extended M3U playlist parser.
@@ -15,32 +14,35 @@ import Networker
  */
 public struct M3UParser {
     /**
-     Splits extended M3U playlist into lines and convert to items.
-     - Parameter string: String representation of extended M3U playlist.
+     Converts an extended M3U playlist into to items.
+     - Parameter string: The string representation of an extended M3U playlist.
      */
-    public func parse(string: String) throws -> M3UPlaylist {
+    public func parse(string: String) throws -> [M3UItemRepresentable] {
         let string = string.trimmingCharacters(in: .whitespacesAndNewlines)
         if string.isEmpty {
             throw M3UParser.Error.contentNotFound
         }
-        var lineParser = M3ULineParser()
-        var lines = [M3UPlaylistLine]()
-        string.appending("\n").forEach {
-            if lineParser.feed($0) {
-                return
-            } else if let line = lineParser.line {
-                lines.append(line)
-                lineParser = M3ULineParser()
+        
+        let collector = ItemsCollector()
+        var handler: CharacterHandler
+        handler = LineStartDetector(collector: collector)
+        string.appending("\n").forEach { char in
+            if let nextHandler = handler.feed(char) {
+                handler = nextHandler
             }
         }
         
-        return try M3UPlaylist(lines: lines)
+        if collector.items.isEmpty {
+            throw M3UParser.Error.malformedM3UPlaylist
+        }
+
+        return collector.items
     }
     /**
-     Converts data into string and splits extended M3U playlist into lines and convert to items.
+     Converts data into string and recieved string converts into extended M3U playlist items.
      - Parameter data: Data representation of extended M3U playlist.
      */
-    public func parse(data: Data) throws -> M3UPlaylist {
+    public func parse(data: Data) throws -> [M3UItemRepresentable] {
         try self.parse(string: data.utf8String)
     }
     

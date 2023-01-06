@@ -1,96 +1,70 @@
 //
 //  M3UParserTests.swift
-//  M3UKiteTests
+//  M3UKitTests
 //
-//  Created by Александр Алгашев on 07.02.2022.
+//  Created by Александр Алгашев on 05.01.2023.
 //
 
 import XCTest
 @testable import M3UKit
 
-class M3UParserTests: XCTestCase {
-    var sut: M3UParser!
+final class M3UParserTests: XCTestCase {
+    private var sut: M3UParser!
 
     override func setUpWithError() throws {
+        try super.setUpWithError()
+        
         self.sut = M3UParser()
     }
 
     override func tearDownWithError() throws {
         self.sut = nil
+        
+        try super.tearDownWithError()
     }
 
-    func test_parseString_emptyString_throws() throws {
-        let expectedError = M3UParser.Error.contentNotFound
-        var actualError: Error? = nil
-        do {
-            _ = try self.sut.parse(string: "")
-        } catch {
-            actualError = error
-        }
+    func testParse_demoPlaylist_returnsCorrectItems() throws {
+        let expectedItems = SamplePlaylist.demo.compactMap { $0 as? M3UItem }
         
-        XCTAssertNotNil(actualError)
-        XCTAssertEqual(expectedError, actualError as? M3UParser.Error)
+        let items = try! self.sut.parse(string: .M3UPlaylist.demo)
+        let actualItems = items.compactMap { $0 as? M3UItem }
+        
+        XCTAssertTrue(items[0] is M3UHeader)
+        XCTAssertEqual(actualItems, expectedItems)
     }
     
-    func test_parseString_whiteSpacesAndNewLinesString_throws() throws {
-        let expectedError = M3UParser.Error.contentNotFound
-        var actualError: Error? = nil
-        do {
-            _ = try self.sut.parse(string: " \n")
-        } catch {
-            actualError = error
-        }
+    func testParse_demoWithCustomKeys_returnsCorrectItems() throws {
+        let expectedItems = SamplePlaylist.demoWithCustomKeys.compactMap { $0 as? M3UItem }
         
-        XCTAssertNotNil(actualError)
-        XCTAssertEqual(expectedError, actualError as? M3UParser.Error)
+        let items = try! self.sut.parse(string: .M3UPlaylist.demoWithCustomKeys)
+        let actualItems = items.compactMap { $0 as? M3UItem }
+        
+        XCTAssertTrue(items[0] is M3UHeader)
+        XCTAssertEqual(actualItems, expectedItems)
     }
     
-    func test_parseString_invalidM3UString_throws() throws {
-        let expectedError = M3UParser.Error.m3uPlaylistIsNotRecognized
-        var actualError: Error? = nil
-        do {
-            _ = try self.sut.parse(string: "INVALID M3U")
-        } catch {
-            actualError = error
-        }
+    func testParse_demoWithUnknownDirective_returnsCorrectItems() throws {
+        let expectedItems = SamplePlaylist.demo.compactMap { $0 as? M3UItem }
         
-        XCTAssertNotNil(actualError)
-        XCTAssertEqual(expectedError, actualError as? M3UParser.Error)
+        let items = try! self.sut.parse(string: .M3UPlaylist.demoWithUnknownDirective)
+        let actualItems = items.compactMap { $0 as? M3UItem }
+        
+        XCTAssertTrue(items[0] is M3UHeader)
+        XCTAssertEqual(actualItems, expectedItems)
     }
     
-    func test_parseString_validM3U_createsCorrectValues() throws {
-        let playlist = try self.sut.parse(string: .M3UPlaylist.demo)
+    func testParse_freeIPTVPlaylist_returnsCorrectItems() throws {
+        let items = try! self.sut.parse(string: .M3UPlaylist.freeiptv)
+        let actualItems = items.compactMap { $0 as? M3UItem }
         
-        XCTAssertEqual(playlist.lines, M3UDemoPlaylist.linesExample)
-        XCTAssertEqual(playlist.items, M3UDemoPlaylist.itemsExample)
-    }
-    
-    func test_parseString_invalidTagInM3U_createsCorrectValues() throws {
-        let playlist = try self.sut.parse(string: .M3UPlaylist.demoWithInvalidTag)
-        
-        XCTAssertEqual(playlist.lines, M3UDemoPlaylist.linesInvalidTagExample)
-        XCTAssertEqual(playlist.items, M3UDemoPlaylist.itemsExample)
-    }
-    
-    func test_parseData_createsCorrectValues() throws {
-        let playlist = try self.sut.parse(data: String.M3UPlaylist.demo.utf8EncodingData)
-        
-        XCTAssertEqual(playlist.lines, M3UDemoPlaylist.linesExample)
-        XCTAssertEqual(playlist.items, M3UDemoPlaylist.itemsExample)
+        XCTAssertEqual(actualItems.count, 768)
+        XCTAssertEqual(actualItems.filter({ $0[.group] != nil }).count, 767)
     }
 
-//    func test_performance_parseChars() throws {
-//        // This is an example of a performance test case.
-//        self.measure {
-//            _ = self.sut.parse(string: String.M3UPlaylist.freeiptv)
-//        }
-//    }
-//
-//    func test_performance_parseStandart() throws {
-//        // This is an example of a performance test case.
-//        self.measure {
-//            _ = String.M3UPlaylist.freeiptv.split(whereSeparator: \.isNewline)
-//        }
-//    }
+    func testPerformanceFreeIPTVPlaylist() throws {
+        self.measure {
+            _ = try! self.sut.parse(string: .M3UPlaylist.freeiptv)
+        }
+    }
 
 }

@@ -21,7 +21,7 @@ public extension M3UParser {
         /**
          Could not recognize the M3U playlist from the specified data.
          */
-        case m3uPlaylistIsNotRecognized
+        case malformedM3UPlaylist
         
         
     }
@@ -43,7 +43,7 @@ extension M3UParser.Error: LocalizedError {
         case .contentNotFound:
             let message = #"Not found any content to parse."#
             errorDescription = NSLocalizedString(message, comment: message)
-        case .m3uPlaylistIsNotRecognized:
+        case .malformedM3UPlaylist:
             let message = #"Could not recognize the M3U playlist from the specified data."#
             errorDescription = NSLocalizedString(message, comment: message)
         }

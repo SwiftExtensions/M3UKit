@@ -1,21 +1,17 @@
 //
 //  HTTPURLResponse.swift
-//  
+//  M3UKitTests
 //
-//  Created by Александр Алгашев on 30.01.2022.
+//  Created by Александр Алгашев on 06.01.2023.
 //
 
 import Foundation
 
 extension HTTPURLResponse {
-    static var ok200: HTTPURLResponse {
-        let url = URL(string: "https://example.com/")!
+    convenience init?(urlString: String, statusCode: Int) {
+        guard let url = URL(string: urlString) else { return nil }
         
-        return HTTPURLResponse(
-            url: url,
-            statusCode: 200,
-            httpVersion: nil,
-            headerFields: nil)!
+        self.init(url: url, statusCode: statusCode, httpVersion: nil, headerFields: nil)
     }
     
     
