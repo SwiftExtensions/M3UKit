@@ -12,7 +12,11 @@
  */
 public enum ExtInfKey: String {
     /**
-     The `"group-title"` key.
+     The `"group_id"` key. The identifier of the group.
+     */
+    case groupID = "group_id"
+    /**
+     The `"group-title"` key. The name of the group.
      */
     case groupTitle = "group-title"
     
