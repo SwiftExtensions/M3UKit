@@ -5,11 +5,22 @@
 **M3UKit** is an easy way of parsing of extended [M3U](https://en.wikipedia.org/wiki/M3U) playlists.
 
 ## Content
+- [Supported directives](#supported-directives)
 - [Installation](#installation)
     - [Swift Package Manager](#swift-package-manager)
     - [CocoaPods](#cocoapods)
 - [Parsing](#parsing)
 - [Loading from newtwork](#loading-from-newtwork)
+
+## Supported directives
+
+| Directive |	Description	                                  | Example |
+|-----------|-------------------------------------------------|---------|
+| #EXTM3U   | file header, must be the first line of the file |	#EXTM3U	|
+| #EXTINF:  | track information: runtime in seconds and display title of the following resource / additional properties as key-value pairs | #EXTINF:123,Artist Name – Track Title</br>artist - title.mp3 |
+| #EXTGRP: | begin named grouping	                          | #EXTGRP:Foreign Channels |
+
+[Go to content](#content)
 
 ## Installation
 
