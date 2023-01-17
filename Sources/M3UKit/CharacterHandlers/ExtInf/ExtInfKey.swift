@@ -19,6 +19,12 @@ public enum ExtInfKey: String {
      The `"group-title"` key. The name of the group.
      */
     case groupTitle = "group-title"
+    /**
+     The `"tvg-name"` key.
+     The name of the channel in the program file,
+     used mainly when using the program in JTV format.
+     */
+    case tvgName = "tvg-name"
     
     
 }
