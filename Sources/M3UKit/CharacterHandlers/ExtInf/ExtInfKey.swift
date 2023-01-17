@@ -25,6 +25,10 @@ public enum ExtInfKey: String {
      used mainly when using the program in JTV format.
      */
     case tvgName = "tvg-name"
+    /**
+     The `"tvg-logo"` key. The URL to the channel logo.
+     */
+    case tvgLogo = "tvg-logo"
     
     
 }

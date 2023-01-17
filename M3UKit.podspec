@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'M3UKit'
-  spec.version      = '1.0.0'
+  spec.version      = '1.1.0'
   spec.summary      = 'The extended M3U playlist parser.'
 
   spec.description  = <<-DESC
