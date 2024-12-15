@@ -20,7 +20,7 @@ public struct M3ULoader {
     /**
      The extended M3U playlist request completion closure.
      */
-    public typealias Completion = (PlaylistResult) -> Void
+    public typealias Completion = (_ result: PlaylistResult) -> Void
     
     /**
      An object that coordinates a group of related, network data-transfer tasks.
@@ -34,7 +34,7 @@ public struct M3ULoader {
      Default value
      [URLSession.shared](https://developer.apple.com/documentation/foundation/urlsession/1409000-shared).
      */
-    public init(session: URLSession = URLSession.shared) {
+    public init(session: URLSession = .shared) {
         self.session = session
     }
     
@@ -56,7 +56,7 @@ public struct M3ULoader {
      import M3UKit
 
      let loader = M3ULoader()
-     loader.load(with: URL_TO_PLAYLIST) { response in
+     try! loader.load(with: URL_TO_PLAYLIST) { response in
          switch response {
          case let .success(playlist):
              print(playlist)
@@ -69,19 +69,19 @@ public struct M3ULoader {
     @discardableResult
     public func load(
         with urlString: String,
-        dispatchQueue: DispatchQueue? = nil,
-        completion: @escaping Completion) throws -> URLSessionDataTask
-    {
+        dispatchQueue queue: DispatchQueue? = nil,
+        completion: @escaping Completion
+    ) throws -> URLSessionDataTask {
         guard let url = URL(string: urlString) else {
             let error = URLError(.badURL, userInfo: [
-                NSLocalizedDescriptionKey : "Malformed URL."
+                NSLocalizedDescriptionKey : "Malformed URL: '\(urlString)'."
             ])
             throw error
         }
            
         let request = URLRequest(url: url)
         
-        return self.load(with: request, dispatchQueue: dispatchQueue, completion: completion)
+        return self.load(with: request, dispatchQueue: queue, completion: completion)
     }
     /**
      Loads an extended [M3U](https://en.wikipedia.org/wiki/M3U) playlist from network.
@@ -117,8 +117,8 @@ public struct M3ULoader {
     public func load(
         with request: URLRequest,
         dispatchQueue: DispatchQueue? = nil,
-        completion: @escaping Completion) -> URLSessionDataTask
-    {
+        completion: @escaping Completion
+    ) -> URLSessionDataTask {
         Networker(session: self.session).run(with: request) { result in
             let result = Result {
                 let data = try result.get()
@@ -127,7 +127,7 @@ public struct M3ULoader {
                 
                 return playlist
             }
-            if let dispatchQueue = dispatchQueue {
+            if let dispatchQueue {
                 dispatchQueue.async { completion(result) }
             } else {
                 completion(result)
@@ -166,11 +166,11 @@ public struct M3ULoader {
     @discardableResult
     public func load(
         with url: URL,
-        dispatchQueue: DispatchQueue? = nil,
-        completion: @escaping Completion) -> URLSessionDataTask
-    {
+        dispatchQueue queue: DispatchQueue? = nil,
+        completion: @escaping Completion
+    ) -> URLSessionDataTask {
         let request = URLRequest(url: url)
-        return self.load(with: request, dispatchQueue: dispatchQueue, completion: completion)
+        return self.load(with: request, dispatchQueue: queue, completion: completion)
     }
     
     
