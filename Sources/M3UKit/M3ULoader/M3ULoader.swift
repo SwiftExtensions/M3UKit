@@ -56,7 +56,10 @@ public struct M3ULoader {
      import M3UKit
 
      let loader = M3ULoader()
-     try! loader.load(with: URL_TO_PLAYLIST) { response in
+     try! loader.load(
+        with: URL_TO_PLAYLIST,
+        dispatchQueue: .main
+     ) { [weak self] response in
          switch response {
          case let .success(playlist):
              print(playlist)
@@ -110,7 +113,10 @@ public struct M3ULoader {
      let loader = M3ULoader()
      let url = URL(string: PATH_TO_PLAYLIST)!
      let request = URLRequest(url: url)
-     loader.load(with: request) { response in
+     loader.load(
+        with: request,
+        dispatchQueue: .main
+     ) { [weak self] response in
          switch response {
          case let .success(playlist):
              print(playlist)
@@ -160,7 +166,10 @@ public struct M3ULoader {
 
      let loader = M3ULoader()
      let url = URL(string: PATH_TO_PLAYLIST)!
-     loader.load(with: url) { response in
+     loader.load(
+        with: url,
+        dispatchQueue: .main
+     ) { [weak self] response in
          switch response {
          case let .success(playlist):
              print(playlist)
