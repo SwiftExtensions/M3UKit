@@ -72,7 +72,14 @@ public struct M3ULoader {
         dispatchQueue queue: DispatchQueue? = nil,
         completion: @escaping Completion
     ) throws -> URLSessionDataTask {
-        guard let url = URL(string: urlString) else {
+        let url: URL?
+        if #available(iOS 17.0, *) {
+            url = URL(string: urlString, encodingInvalidCharacters: false)
+        } else {
+            url = URL(string: urlString)
+        }
+        
+        guard let url else {
             let error = URLError(.badURL, userInfo: [
                 NSLocalizedDescriptionKey : "Malformed URL: '\(urlString)'."
             ])
