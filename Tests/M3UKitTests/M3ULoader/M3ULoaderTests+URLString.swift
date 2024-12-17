@@ -24,7 +24,7 @@ extension M3ULoaderTests {
         XCTAssertNil(dataTask)
         XCTAssertNotNil(actualError)
         XCTAssertTrue(actualError is URLError)
-        XCTAssertEqual(actualError?.localizedDescription, "Malformed URL.")
+        XCTAssertEqual(actualError?.localizedDescription, "Malformed URL: \'INVALID URL\'.")
     }
     
     func test_loadURLStringError_callsFailture() throws {
