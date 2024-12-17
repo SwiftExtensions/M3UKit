@@ -11,6 +11,7 @@
     - [CocoaPods](#cocoapods)
 - [Parsing](#parsing)
 - [Loading from newtwork](#loading-from-newtwork)
+- [Items](items)
 
 ## Supported directives
 
@@ -60,7 +61,10 @@ let playlist = parser.parse(string: PLAYLIST)
 import M3UKit
 
 let loader = M3ULoader()
-try? loader.load(with: URL_TO_PLAYLIST) { response in
+try? loader.load(
+    with: URL_TO_PLAYLIST,
+    dispatchQueue: .main
+) { [weak self] response in
     switch response {
     case let .success(playlist):
         print(playlist)
@@ -68,6 +72,18 @@ try? loader.load(with: URL_TO_PLAYLIST) { response in
         print(error)
     }
 }
+```
+
+[Go to content](#content)
+
+## Items
+
+```swift
+import M3UKit
+
+...
+// The M3U playlist tracks.
+let items = playlist.compactMap(\.item)
 ```
 
 [Go to content](#content)
