@@ -76,7 +76,7 @@ public struct M3ULoader {
         completion: @escaping Completion
     ) throws -> URLSessionDataTask {
         let url: URL?
-        if #available(iOS 17.0, *) {
+        if #available(iOS 17.0, macOS 14.0, *) {
             url = URL(string: urlString, encodingInvalidCharacters: false)
         } else {
             url = URL(string: urlString)
