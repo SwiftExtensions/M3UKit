@@ -35,9 +35,9 @@ struct URLSessionResponse {
      */
     func handle() -> Result<Data, Error> {
         let result: Result<Data, Error>
-        if let error = self.error {
+        if let error {
             result = .failure(error)
-        } else if let data = self.data {
+        } else if let data {
             result = .success(data)
         } else {
             let error = URLError(.badServerResponse, userInfo: [
