@@ -18,8 +18,8 @@ extension URLSession {
      */
     func dataTask(
         with request: URLRequest,
-        completion: @escaping (URLSessionResponse) -> Void)
-    -> URLSessionDataTask {
+        completion: @escaping (_ response: URLSessionResponse) -> Void
+    ) -> URLSessionDataTask {
         self.dataTask(with: request) { data, response, error in
             let response = URLSessionResponse(data: data, metadata: response, error: error)
             completion(response)
