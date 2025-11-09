@@ -28,13 +28,11 @@ struct LineStartDetector: CharacterHandler {
      - Returns:Tthe character handler to parse next character.
      */
     func feed(_ char: Character) -> CharacterHandler? {
-        var next: CharacterHandler?
-        if !char.isNewline && !char.isWhitespace {
-            self.collector.append(char)
-            next = self.route(char)
-        }
+        if char.isNewline || char.isWhitespace { return nil }
         
-        return next
+        self.collector.append(char)
+        
+        return self.route(char)
     }
     /**
      Route to the next character handler according to the current character.
