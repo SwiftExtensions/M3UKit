@@ -122,21 +122,11 @@ public class M3UPlaylistLoader {
      }
      ```
      */
-    public convenience init(urlString: String, session: URLSession = .shared) throws {
-        let url: URL?
-        if #available(iOS 17.0, macOS 14.0, *) {
-            url = URL(string: urlString, encodingInvalidCharacters: false)
-        } else {
-            url = URL(string: urlString)
-        }
-        
-        guard let url else {
-            let error = URLError(.badURL, userInfo: [
-                NSLocalizedDescriptionKey : "Malformed URL: '\(urlString)'."
-            ])
-            throw error
-        }
-        
+    public convenience init(
+        urlString: String,
+        session: URLSession = .shared
+    ) throws {
+        let url = try URLBuilder(string: urlString).build()
         self.init(url: url, session: session)
     }
     
