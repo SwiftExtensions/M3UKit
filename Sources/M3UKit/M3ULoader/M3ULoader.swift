@@ -178,3 +178,49 @@ public struct M3ULoader {
     
     
 }
+
+// MARK: - Swift Concurrency
+
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+public extension M3ULoader {
+    /**
+     Loads and parses a playlist using Swift Concurrency.
+
+     This method performs a network request using the loader's underlying `URLSession`,
+     validates that the response is an `HTTPURLResponse` with a `2xx` status code,
+     and then parses the received data into an array of `M3UItemRepresentable`.
+
+     - Parameter request: The URL request for the playlist resource.
+     - Returns: A parsed playlist as an array of `M3UItemRepresentable`.
+     - Throws: A `URLError(.badServerResponse)` if the response is not HTTP or the status code is not `2xx`,
+       or any error thrown by `M3UParser.parse(data:)`.
+     */
+    func playlist(for request: URLRequest) async throws -> [M3UItemRepresentable] {
+        let (data, response) = try await self.session.data(for: request)
+        let httpResponse = response as? HTTPURLResponse
+        guard let httpResponse else {
+            var userInfo: [String : Any] = [:]
+            userInfo[NSLocalizedDescriptionKey] = "Invalid response: \(response)"
+            userInfo[NSURLErrorFailingURLStringErrorKey] = request.url?.absoluteString
+            throw URLError(.badServerResponse, userInfo: userInfo)
+        }
+        
+        let statusCode = httpResponse.statusCode
+        guard (200..<300).contains(statusCode) else {
+            var userInfo: [String : Any] = [:]
+            let statusDescription = HTTPURLResponse.localizedString(forStatusCode: statusCode)
+            userInfo[NSLocalizedDescriptionKey] = """
+                Invalid status code: \(statusCode) (\(statusDescription))
+                """
+            userInfo[NSURLErrorFailingURLStringErrorKey] = request.url?.absoluteString
+            throw URLError(.badServerResponse, userInfo: userInfo)
+        }
+        
+        let parser = M3UParser()
+        let playlist = try parser.parse(data: data)
+        
+        return playlist
+    }
+    
+    
+}
