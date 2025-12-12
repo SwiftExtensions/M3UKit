@@ -29,11 +29,18 @@ public class M3UPlaylistLoader {
     /**
      An object that coordinates a group of related, network data-transfer tasks.
      */
-    public let session: URLSession
+    public var session: URLSession { self.loader.session }
     /**
      A URL session task that returns downloaded extended M3U playlist.
      */
     public private(set) var dataTask: URLSessionDataTask?
+    
+    /**
+     The loader of an extended
+     [M3U](https://en.wikipedia.org/wiki/M3U)
+     playlists.
+     */
+    private let loader: M3ULoader
     
     /**
      Creates and initializes a URL extended M3U playlist loader with the given URLRequest and URLSession.
@@ -62,7 +69,7 @@ public class M3UPlaylistLoader {
      */
     public init(request: URLRequest, session: URLSession = .shared) {
         self.request = request
-        self.session = session
+        self.loader = M3ULoader(session: session)
     }
     /**
      Creates and initializes a URL extended M3U playlist loader with the given URL and URLSession.
@@ -164,8 +171,7 @@ public class M3UPlaylistLoader {
         dispatchQueue: DispatchQueue? = nil,
         completion: @escaping Completion
     ) {
-        let loader = M3ULoader()
-        self.dataTask = loader.load(
+        self.dataTask = self.loader.load(
             with: self.request,
             dispatchQueue: dispatchQueue,
             completion: completion
