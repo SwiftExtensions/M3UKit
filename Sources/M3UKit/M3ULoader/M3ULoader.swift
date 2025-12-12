@@ -207,6 +207,7 @@ public extension M3ULoader {
      */
     func playlist(for request: URLRequest) async throws -> [M3UItemRepresentable] {
         let (bytes, response) = try await self.session.bytes(for: request)
+        try Task.checkCancellation()
         let httpResponse = response as? HTTPURLResponse
         guard let httpResponse else {
             var userInfo: [String : Any] = [:]
@@ -227,9 +228,15 @@ public extension M3ULoader {
         }
         
         let streamParser = M3UStreamParser()
+        var receivedCharactersCount = 0
         for try await char in bytes.characters {
             streamParser.feed(char)
+            receivedCharactersCount += 1
+            if receivedCharactersCount.isMultiple(of: 4096) {
+                try Task.checkCancellation()
+            }
         }
+        try Task.checkCancellation()
         streamParser.finish()
         
         do {
