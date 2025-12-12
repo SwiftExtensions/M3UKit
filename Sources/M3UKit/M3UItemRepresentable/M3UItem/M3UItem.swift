@@ -19,7 +19,7 @@ public struct M3UItem: Equatable, M3UItemRepresentable {
      - Parameter values: Key-value pairs of
      [M3U](https://en.wikipedia.org/wiki/M3U) playlist track info.
      */
-    public init(values: [String : String] = [String : String]()) {
+    public init(values: [String : String] = [:]) {
         self.values = values
     }
     
