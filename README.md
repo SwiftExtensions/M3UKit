@@ -10,8 +10,8 @@
     - [Swift Package Manager](#swift-package-manager)
     - [CocoaPods](#cocoapods)
 - [Parsing](#parsing)
-- [Loading from newtwork](#loading-from-newtwork)
-- [Items](items)
+- [Loading from network](#loading-from-network)
+- [Items](#items)
 
 ## Supported directives
 
@@ -55,7 +55,19 @@ let playlist = parser.parse(string: PLAYLIST)
 ```
 [Go to content](#content)
 
-## Loading from newtwork
+## Loading from network
+
+### Swift Concurrency
+
+```swift
+import M3UKit
+
+let loader = M3ULoader()
+let playlist = try await loader.playlist(from: URL_TO_PLAYLIST)
+print(playlist)
+```
+
+### Completion-based API
 
 ```swift
 import M3UKit
