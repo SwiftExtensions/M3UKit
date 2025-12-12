@@ -47,3 +47,17 @@ extension M3UStreamParser.StateError: LocalizedError {
     
     
 }
+
+public extension Error {
+    /**
+     Casts the error to `M3UStreamParser.StateError`.
+
+     - Returns: A `M3UStreamParser.StateError` value if the error represents a stream parser state error,
+       otherwise `nil`.
+     */
+    var m3uStreamParserStateError: M3UStreamParser.StateError? {
+        self as? M3UStreamParser.StateError
+    }
+    
+    
+}
