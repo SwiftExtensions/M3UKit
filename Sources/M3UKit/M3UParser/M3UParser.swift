@@ -22,21 +22,14 @@ public struct M3UParser {
         if string.isEmpty {
             throw M3UParser.Error.contentNotFound
         }
-        
-        let collector = ItemsCollector()
-        var handler: CharacterHandler
-        handler = LineStartDetector(collector: collector)
-        string.appending("\n").forEach { char in
-            if let nextHandler = handler.feed(char) {
-                handler = nextHandler
-            }
-        }
-        
-        if collector.items.isEmpty {
-            throw M3UParser.Error.malformedM3UPlaylist
-        }
 
-        return collector.items
+        let streamParser = M3UStreamParser()
+        string.forEach { char in
+            streamParser.feed(char)
+        }
+        streamParser.finish()
+
+        return try streamParser.result.get()
     }
     /**
      Converts data into string and recieved string converts into extended M3U playlist items.
