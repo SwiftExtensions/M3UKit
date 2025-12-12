@@ -206,7 +206,7 @@ public extension M3ULoader {
      ```
      */
     func playlist(for request: URLRequest) async throws -> [M3UItemRepresentable] {
-        let (data, response) = try await self.session.data(for: request)
+        let (bytes, response) = try await self.session.bytes(for: request)
         let httpResponse = response as? HTTPURLResponse
         guard let httpResponse else {
             var userInfo: [String : Any] = [:]
@@ -226,10 +226,18 @@ public extension M3ULoader {
             throw URLError(.badServerResponse, userInfo: userInfo)
         }
         
-        let parser = M3UParser()
-        let playlist = try parser.parse(data: data)
+        let streamParser = M3UStreamParser()
+        for try await char in bytes.characters {
+            streamParser.feed(char)
+        }
+        streamParser.finish()
         
-        return playlist
+        do {
+            let playlist = try streamParser.result.get()
+            return playlist
+        } catch let error as M3UStreamParser.StateError where error == .feedNotCalled {
+            throw M3UParser.Error.contentNotFound
+        }
     }
 
     /**
