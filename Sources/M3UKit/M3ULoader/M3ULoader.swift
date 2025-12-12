@@ -194,6 +194,16 @@ public extension M3ULoader {
      - Returns: A parsed playlist as an array of `M3UItemRepresentable`.
      - Throws: A `URLError(.badServerResponse)` if the response is not HTTP or the status code is not `2xx`,
        or any error thrown by `M3UParser.parse(data:)`.
+
+     ### Example of usage
+     ```swift
+     import M3UKit
+
+     let loader = M3ULoader()
+     let request = URLRequest(url: URL(string: "https://example.com/playlist.m3u")!)
+     let playlist = try await loader.playlist(for: request)
+     print(playlist)
+     ```
      */
     func playlist(for request: URLRequest) async throws -> [M3UItemRepresentable] {
         let (data, response) = try await self.session.data(for: request)
@@ -220,6 +230,52 @@ public extension M3ULoader {
         let playlist = try parser.parse(data: data)
         
         return playlist
+    }
+
+    /**
+     Loads and parses a playlist located at the given URL using Swift Concurrency.
+
+     - Parameter url: The playlist URL.
+     - Returns: A parsed playlist as an array of `M3UItemRepresentable`.
+     - Throws: A `URLError(.badServerResponse)` if the response is not HTTP or the status code is not `2xx`,
+       or any error thrown by `M3UParser.parse(data:)`.
+
+     ### Example of usage
+     ```swift
+     import M3UKit
+
+     let loader = M3ULoader()
+     let url = URL(string: "https://example.com/playlist.m3u")!
+     let playlist = try await loader.playlist(from: url)
+     print(playlist)
+     ```
+     */
+    func playlist(from url: URL) async throws -> [M3UItemRepresentable] {
+        try await self.playlist(for: URLRequest(url: url))
+    }
+
+    /**
+     Loads and parses a playlist located at the given URL string using Swift Concurrency.
+
+     - Parameter urlString: The playlist URL string.
+     - Returns: A parsed playlist as an array of `M3UItemRepresentable`.
+     - Throws: An error thrown by `URLBuilder.build()`, a `URLError(.badServerResponse)` if the response is not HTTP
+       or the status code is not `2xx`, or any error thrown by `M3UParser.parse(data:)`.
+
+     ### Example of usage
+     ```swift
+     import M3UKit
+
+     let loader = M3ULoader()
+     let playlist = try await loader.playlist(from: "https://example.com/playlist.m3u")
+     print(playlist)
+     ```
+     */
+    func playlist(
+        from urlString: String
+    ) async throws -> [M3UItemRepresentable] {
+        let url = try URLBuilder(string: urlString).build()
+        return try await self.playlist(from: url)
     }
     
     
