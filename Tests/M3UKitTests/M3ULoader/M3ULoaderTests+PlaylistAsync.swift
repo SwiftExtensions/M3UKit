@@ -73,7 +73,7 @@ extension M3ULoaderTests {
 
         let url = URL(string: urlString)!
 
-        let playlist = try await self.sut.playlist(for: url)
+        let playlist = try await self.sut.playlist(from: url)
         let actualItems = playlist.compactMap { $0 as? M3UItem }
 
         XCTAssertEqual(actualItems, expectedItems)
@@ -88,7 +88,7 @@ extension M3ULoaderTests {
         MockURLSession.results[urlString] = result
         defer { MockURLSession.results[urlString] = nil }
 
-        let playlist = try await self.sut.playlist(for: urlString)
+        let playlist = try await self.sut.playlist(from: urlString)
         let actualItems = playlist.compactMap { $0 as? M3UItem }
 
         XCTAssertEqual(actualItems, expectedItems)
@@ -98,7 +98,7 @@ extension M3ULoaderTests {
         let invalidURLString = "ht^tp://example.com"
 
         do {
-            _ = try await self.sut.playlist(for: invalidURLString)
+            _ = try await self.sut.playlist(from: invalidURLString)
             XCTFail("Expected to throw")
         } catch {
             let actualError = error as NSError
